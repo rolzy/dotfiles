@@ -138,8 +138,8 @@ augroup END
 " .............................................................................
 " tpope/vim-fugitive
 " .............................................................................
-nmap <leader>gh :diffget //3<CR>
-nmap <leader>gu :diffget //2<CR>
+nmap <leader>gp :diffget //3<CR>
+nmap <leader>gq :diffget //2<CR>
 nmap <leader>gs :G<CR>
 
 if $TERM =~ 'xterm-256color'
