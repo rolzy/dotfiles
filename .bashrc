@@ -1,6 +1,9 @@
 #!/bin/bash
 # This file runs every time you open a new terminal window.
 
+# Set vi-mode
+set -o vi
+
 # Limit number of lines and entries in the history.
 export HISTFILESIZE=50000
 export HISTSIZE=50000

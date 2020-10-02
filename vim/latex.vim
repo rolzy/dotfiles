@@ -44,6 +44,8 @@ Plug 'lambdalisue/fern.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 
+" LaTeX
+Plug 'lervag/vimtex'
 call plug#end()
 
 " Load Gruvbox
@@ -141,3 +143,12 @@ augroup END
 nmap <leader>gp :diffget //3<CR>
 nmap <leader>gq :diffget //2<CR>
 nmap <leader>gs :G<CR>
+
+" .............................................................................
+" lervag/vimtex
+" .............................................................................
+let g:tex_flavor = 'latex'
+let g:vimtex_view_general_viewer = 'SumatraPDF'
+let g:vimtex_view_general_options = '-reuse-instance @pdf'
+let g:vimtex_view_general_options_latexmk = '-reuse-instance'
+
