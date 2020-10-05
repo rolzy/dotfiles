@@ -44,6 +44,11 @@ Plug 'lambdalisue/fern.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 
+" markdown support
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
+
 call plug#end()
 
 " Load Gruvbox
@@ -141,3 +146,18 @@ augroup END
 nmap <leader>gp :diffget //3<CR>
 nmap <leader>gq :diffget //2<CR>
 nmap <leader>gs :G<CR>
+
+" .............................................................................
+" plasticboy/vim-markdown
+" .............................................................................
+autocmd FileType markdown set conceallevel=0
+autocmd FileType markdown normal zR
+
+let g:vim_markdown_frontmatter=1
+
+" .............................................................................
+" iamcco/markdown-preview.nvim
+" .............................................................................
+let g:mkdp_refresh_slow=1
+let g:mkdp_markdown_css='/home/roland/dotfiles/css/github-markdown.css'
+let g:mkdp_browser = '/c/Program Files/Mozilla Firefox/firefox.exe'
