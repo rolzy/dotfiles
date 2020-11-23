@@ -10,7 +10,8 @@ sudo apt-get update && sudo apt-get install -y \
     python3-pip \
     rsync \
     tmux \
-    unzip
+    unzip \
+    virtualenv
 
 sudo add-apt-repository ppa:neovim-ppa/stable 
 sudo apt-get update
@@ -32,7 +33,8 @@ if [ "$version" == "full" ]; then
     rm -rf ~/.fzf
     git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install
 
-    pip3 install pynvim jedi
+    virtualenv -p python3 ~/python_env
+    ~/python_env/bin/pip3 install pynvim jedi
 
     # Install nodejs/yarn
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -

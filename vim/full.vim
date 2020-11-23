@@ -20,15 +20,13 @@ highlight ColorColumn ctermbg=0 guibg=lightgrey
 " Set mapleader before loading plugins
 let mapleader=" "
 
+" Set tabwidth to 2 for html
+autocmd BufRead,BufNewFile *.htm,*.html,*.js setlocal tabstop=2 shiftwidth=2 softtabstop=2
+
 call plug#begin('~/.local/share/nvim/plugged')
 
 " Gruvbox theme
 Plug 'morhetz/gruvbox'
-
-" Python auto-complete
-Plug 'davidhalter/jedi-vim'
-Plug 'Shougo/deoplete.nvim', { 'do': 'UpdateRemotePlugins' }
-Plug 'zchee/deoplete-jedi'
 
 " Auto-completing brackets and quotes
 Plug 'jiangmiao/auto-pairs'
@@ -49,22 +47,20 @@ Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
 
+" LaTeX
+Plug 'lervag/vimtex'
+
+" Vimsurround
+Plug 'tpope/vim-surround'
+
+" Python indentation
+Plug 'Vimjas/vim-python-pep8-indent'
+
 call plug#end()
 
 " Load Gruvbox
 colorscheme gruvbox
 set background=dark
-
-" deoplete-jedi autocompletions
-let g:deoplete#enable_at_startup = 1
-autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-
-" Don't use jedi autocomplete
-let g:jedi#completions_enabled = 0
-
-" Use go-to function in split, not buffers
-let g:jedi#use_splits_not_buffers = "right"
 
 " Disable arrows and pgup/pgdn
 noremap <Up> <Nop>
