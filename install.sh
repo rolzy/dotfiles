@@ -22,8 +22,10 @@ echo 'set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath=&runtimepath
 source ~/.vimrc' > ~/.config/nvim/init.vim
 
+echo 'source ~/dotfiles/vim/simple.vim' > ~/.vimrc
+
 if [ "$version" == "full" ]; then
-    ln -nsf ~/dotfiles/vim/full.vim ~/.vimrc
+    echo 'source ~/dotfiles/vim/full.vim' >> ~/.vimrc
 
     # Install Plug (Vim plugin manager).
     curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
@@ -33,16 +35,13 @@ if [ "$version" == "full" ]; then
     rm -rf ~/.fzf
     git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install
 
-    virtualenv -p python3 ~/python_env
-    ~/python_env/bin/pip3 install pynvim jedi
-
     # Install nodejs/yarn
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
     sudo apt update && sudo apt install yarn
 
     if [ "$latex" == 'yes' ]; then
-        ln -nsf ~/dotfiles/vim/latex.vim ~/.vimrc
+        echo 'source ~/dotfiles/vim/latex.vim' >> ~/.vimrc
 
         # Install tex live
         echo "Installing TeX Live. This can take an hour."
@@ -53,6 +52,4 @@ if [ "$version" == "full" ]; then
         echo "Don't forget to set your PATH!"
         echo "Install a PDF reader here: https://medium.com/@Pirmin/a-minimal-latex-setup-on-windows-using-wsl2-and-neovim-51259ff94734"
     fi
-else
-    ln -nsf ~/dotfiles/vim/simple.vim ~/.vimrc
 fi

@@ -1,28 +1,3 @@
-syntax on
-
-set noerrorbells
-set tabstop=4 softtabstop=4
-set shiftwidth=4
-set expandtab
-set smartindent
-set rnu
-set nowrap
-set smartcase
-set noswapfile
-set nobackup
-set undodir=~/.vim/undodir
-set undofile
-set incsearch
-
-set colorcolumn=80
-highlight ColorColumn ctermbg=0 guibg=lightgrey
-
-" Set mapleader before loading plugins
-let mapleader=" "
-
-" Set tabwidth to 2 for html
-autocmd BufRead,BufNewFile *.htm,*.html,*.js setlocal tabstop=2 shiftwidth=2 softtabstop=2
-
 call plug#begin('~/.local/share/nvim/plugged')
 
 " Gruvbox theme
@@ -47,9 +22,6 @@ Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
 
-" LaTeX
-Plug 'lervag/vimtex'
-
 " Vimsurround
 Plug 'tpope/vim-surround'
 
@@ -61,20 +33,6 @@ call plug#end()
 " Load Gruvbox
 colorscheme gruvbox
 set background=dark
-
-" Disable arrows and pgup/pgdn
-noremap <Up> <Nop>
-noremap <Down> <Nop>
-noremap <Left> <Nop>
-noremap <Right> <Nop>
-noremap <PageUp> <Nop>
-noremap <PageDown> <Nop>
-
-" Navigate around splits with a single key combo.
-nnoremap <C-l> <C-w><C-l>
-nnoremap <C-h> <C-w><C-h>
-nnoremap <C-k> <C-w><C-k>
-nnoremap <C-j> <C-w><C-j>
 
 " Use CtrlP for fzf
 nnoremap <C-p> :GFiles<CR>
