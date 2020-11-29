@@ -20,6 +20,9 @@ highlight ColorColumn ctermbg=0 guibg=lightgrey
 " Set mapleader before loading plugins
 let mapleader=" "
 
+" Set tabwidth to 2 for html
+autocmd BufRead,BufNewFile *.htm,*.html,*.js setlocal tabstop=2 shiftwidth=2 softtabstop=2
+
 " Disable arrows and pgup/pgdn
 noremap <Up> <Nop>
 noremap <Down> <Nop>
@@ -33,8 +36,3 @@ nnoremap <C-l> <C-w><C-l>
 nnoremap <C-h> <C-w><C-h>
 nnoremap <C-k> <C-w><C-k>
 nnoremap <C-j> <C-w><C-j>
-
-if $TERM =~ 'xterm-256color'
-    set noek
-endif
-

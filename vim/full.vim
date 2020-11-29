@@ -1,28 +1,3 @@
-syntax on
-
-set noerrorbells
-set tabstop=4 softtabstop=4
-set shiftwidth=4
-set expandtab
-set smartindent
-set rnu
-set nowrap
-set smartcase
-set noswapfile
-set nobackup
-set undodir=~/.vim/undodir
-set undofile
-set incsearch
-
-set colorcolumn=80
-highlight ColorColumn ctermbg=0 guibg=lightgrey
-
-" Set mapleader before loading plugins
-let mapleader=" "
-
-" Set tabwidth to 2 for html
-autocmd BufRead,BufNewFile *.htm,*.html,*.js setlocal tabstop=2 shiftwidth=2 softtabstop=2
-
 call plug#begin('~/.local/share/nvim/plugged')
 
 " Gruvbox theme
@@ -47,14 +22,17 @@ Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
 
-" LaTeX
-Plug 'lervag/vimtex'
-
 " Vimsurround
 Plug 'tpope/vim-surround'
 
 " Python indentation
 Plug 'Vimjas/vim-python-pep8-indent'
+
+" autocomplete
+Plug 'ncm2/ncm2'
+Plug 'roxma/nvim-yarp'
+Plug 'ncm2/ncm2-bufword'
+Plug 'ncm2/ncm2-path'
 
 call plug#end()
 
@@ -62,22 +40,13 @@ call plug#end()
 colorscheme gruvbox
 set background=dark
 
-" Disable arrows and pgup/pgdn
-noremap <Up> <Nop>
-noremap <Down> <Nop>
-noremap <Left> <Nop>
-noremap <Right> <Nop>
-noremap <PageUp> <Nop>
-noremap <PageDown> <Nop>
-
-" Navigate around splits with a single key combo.
-nnoremap <C-l> <C-w><C-l>
-nnoremap <C-h> <C-w><C-h>
-nnoremap <C-k> <C-w><C-k>
-nnoremap <C-j> <C-w><C-j>
-
 " Use CtrlP for fzf
 nnoremap <C-p> :GFiles<CR>
+
+" .............................................................................
+" jiangmiao/auto-pairs
+" .............................................................................
+au FileType python let b:AutoPairs = AutoPairsDefine({"f'" : "'", "r'" : "'", "b'" : "'"})
 
 " .............................................................................
 " lambdalisue/fern.vim
@@ -157,3 +126,27 @@ let g:vim_markdown_frontmatter=1
 let g:mkdp_refresh_slow=1
 let g:mkdp_markdown_css='/home/roland/dotfiles/css/github-markdown.css'
 let g:mkdp_browser = '/c/Program Files/Mozilla Firefox/firefox.exe'
+
+" .............................................................................
+" ncm2/ncm2
+" .............................................................................
+" enable ncm2 for all buffers
+autocmd BufEnter * call ncm2#enable_for_buffer()
+
+" IMPORTANT: :help Ncm2PopupOpen for more information
+set completeopt=noinsert,menuone,noselect"
+set shortmess+=c
+
+" CTRL-C doesn't trigger the InsertLeave autocmd . map to <ESC> instead.
+inoremap <c-c> <ESC>
+
+" When the <Enter> key is pressed while the popup menu is visible, it only
+" hides the menu. Use this mapping to close the menu and also start a new line.
+inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+
+" Use <TAB> to select the popup menu:
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+let g:ncm2#popup_delay=0
+let g:ncm2#complete_length=1
