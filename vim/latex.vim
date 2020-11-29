@@ -56,6 +56,12 @@ Plug 'tpope/vim-surround'
 " Python indentation
 Plug 'Vimjas/vim-python-pep8-indent'
 
+" autocomplete
+Plug 'ncm2/ncm2'
+Plug 'roxma/nvim-yarp'
+Plug 'ncm2/ncm2-bufword'
+Plug 'ncm2/ncm2-path'
+
 call plug#end()
 
 " Load Gruvbox
@@ -79,7 +85,12 @@ nnoremap <C-j> <C-w><C-j>
 " Use CtrlP for fzf
 nnoremap <C-p> :GFiles<CR>
 
-".............................................................................
+" .............................................................................
+" jiangmiao/auto-pairs
+" .............................................................................
+au FileType python let b:AutoPairs = AutoPairsDefine({"f'" : "'", "r'" : "'", "b'" : "'"})
+
+" .............................................................................
 " lambdalisue/fern.vim
 " .............................................................................
 
@@ -166,3 +177,26 @@ let g:mkdp_refresh_slow=1
 let g:mkdp_markdown_css='/home/roland/dotfiles/css/github-markdown.css'
 let g:mkdp_browser = '/c/Program Files/Mozilla Firefox/firefox.exe'
 
+" .............................................................................
+" ncm2/ncm2
+" .............................................................................
+" enable ncm2 for all buffers
+autocmd BufEnter * call ncm2#enable_for_buffer()
+
+" IMPORTANT: :help Ncm2PopupOpen for more information
+set completeopt=noinsert,menuone,noselect"
+set shortmess+=c
+
+" CTRL-C doesn't trigger the InsertLeave autocmd . map to <ESC> instead.
+inoremap <c-c> <ESC>
+
+" When the <Enter> key is pressed while the popup menu is visible, it only
+" hides the menu. Use this mapping to close the menu and also start a new line.
+inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+
+" Use <TAB> to select the popup menu:
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+let g:ncm2#popup_delay=0
+let g:ncm2#complete_length=1
