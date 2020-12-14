@@ -41,6 +41,7 @@ if [ "$version" == "full" ]; then
     sudo apt update && sudo apt install yarn
 
     if [ "$latex" == 'yes' ]; then
+        sed -i '$ d' ~/.vimrc
         echo 'source ~/dotfiles/vim/latex.vim' >> ~/.vimrc
 
         # Install tex live
