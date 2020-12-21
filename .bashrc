@@ -106,3 +106,6 @@ unset color_prompt force_color_prompt
 alias pip="pip3"
 alias python="python3"
 alias vim="nvim"
+# Install Ruby Gems to ~/gems
+export GEM_HOME="$HOME/gems"
+export PATH="$HOME/gems/bin:$PATH"

@@ -29,10 +29,7 @@ Plug 'tpope/vim-surround'
 Plug 'Vimjas/vim-python-pep8-indent'
 
 " autocomplete
-Plug 'ncm2/ncm2'
-Plug 'roxma/nvim-yarp'
-Plug 'ncm2/ncm2-bufword'
-Plug 'ncm2/ncm2-path'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " LaTeX
 Plug 'lervag/vimtex'
@@ -122,6 +119,7 @@ autocmd FileType markdown set conceallevel=0
 autocmd FileType markdown normal zR
 
 let g:vim_markdown_frontmatter=1
+let g:vim_markdown_folding_disabled = 1
 
 " .............................................................................
 " iamcco/markdown-preview.nvim
@@ -131,29 +129,26 @@ let g:mkdp_markdown_css='/home/roland/dotfiles/css/github-markdown.css'
 let g:mkdp_browser = '/c/Program Files/Mozilla Firefox/firefox.exe'
 
 " .............................................................................
-" ncm2/ncm2
+" neoclide/coc.nvim
 " .............................................................................
-" enable ncm2 for all buffers
-autocmd BufEnter * call ncm2#enable_for_buffer()
+nmap <silent> gd <Plug>(coc-definition)
 
-" IMPORTANT: :help Ncm2PopupOpen for more information
-set completeopt=noinsert,menuone,noselect"
-set shortmess+=c
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+    if (index(['vim','help'], &filetype) >= 0)
+        execute 'h '.expand('<cword>')
+    else
+        call CocAction('doHover')
+    endif
+endfunction
 
-" CTRL-C doesn't trigger the InsertLeave autocmd . map to <ESC> instead.
-inoremap <c-c> <ESC>
+nmap <leader>rn <Plug>(coc-rename)
 
-" When the <Enter> key is pressed while the popup menu is visible, it only
-" hides the menu. Use this mapping to close the menu and also start a new line.
-inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
-
-" Use <TAB> to select the popup menu:
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-let g:ncm2#popup_delay=0
-let g:ncm2#complete_length=1
-
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 " .............................................................................
 " lervag/vimtex
 " .............................................................................
