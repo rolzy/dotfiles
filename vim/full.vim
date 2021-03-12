@@ -37,8 +37,12 @@ call plug#end()
 colorscheme gruvbox
 set background=dark
 
-" Use CtrlP for fzf
+" .............................................................................
+" junegunn/fzf
+" .............................................................................
+" Use CtrlP for fzf filesearch
 nnoremap <C-p> :GFiles<CR>
+nnoremap <C-g> :Ag<CR>
 
 " .............................................................................
 " jiangmiao/auto-pairs

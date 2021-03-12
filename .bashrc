@@ -109,3 +109,7 @@ alias vim="nvim"
 # Install Ruby Gems to ~/gems
 export GEM_HOME="$HOME/gems"
 export PATH="$HOME/gems/bin:$PATH"
+# Add go to path
+export PATH=$PATH:/usr/local/go/bin
+export PATH=$PATH:/home/roland/go/bin
+export PATH=$PATH:/home/rolzy/.local/bin

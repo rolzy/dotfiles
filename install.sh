@@ -11,7 +11,8 @@ sudo apt-get update && sudo apt-get install -y \
     rsync \
     tmux \
     unzip \
-    virtualenv
+    virtualenv \
+    silversearcher-ag
 
 sudo add-apt-repository ppa:neovim-ppa/stable 
 sudo apt-get update
