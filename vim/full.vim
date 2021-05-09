@@ -35,7 +35,7 @@ call plug#end()
 
 " Load Gruvbox
 colorscheme gruvbox
-set background=dark
+hi Normal guibg=NONE ctermbg=NONE
 
 " .............................................................................
 " junegunn/fzf
