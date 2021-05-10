@@ -103,9 +103,11 @@ else
 fi
 unset color_prompt force_color_prompt
 
+alias see="explorer.exe"
 alias pip="pip3"
 alias python="python3"
 alias vim="nvim"
+export BROWSER="/mnt/c/Program Files (x86)/Microsoft/Edge/Application/msedge.exe"
 # Install Ruby Gems to ~/gems
 export GEM_HOME="$HOME/gems"
 export PATH="$HOME/gems/bin:$PATH"
