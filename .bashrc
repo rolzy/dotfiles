@@ -124,3 +124,14 @@ alias ll='ls -la'
 
 ## Show hidden files ##
 alias l.='ls -d .* --color=auto'
+
+alias gs='git status'
+alias push='git push'
+alias pull='git pull'
+
+ga() {
+    option=${2:-''}
+    [ -z "$option" ] && git add "$1" || git add "$1" "$option"
+}
+
+gcm() { git commit -m "$1"; }
