@@ -113,3 +113,12 @@ export PATH="$HOME/gems/bin:$PATH"
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:/home/roland/go/bin
 export PATH=$PATH:/home/rolzy/.local/bin
+
+# Colorize ls output
+alias ls='ls --color'
+
+## Use a long listing format ##
+alias ll='ls -la'
+
+## Show hidden files ##
+alias l.='ls -d .* --color=auto'
