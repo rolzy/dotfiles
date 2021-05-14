@@ -39,8 +39,11 @@ if [ "$version" == "full" ]; then
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
     sudo apt update && sudo apt install yarn
+    curl -sL https://deb.nodesource.com/setup_12.x -o nodesource_setup.sh
+    sudo bash nodesource_setup.sh
+    sudo apt install nodejs
 
     # Install vim extensions
     nvim --headless +PlugInstall +qall
-    nvim --headless +'CocInstall coc-python' +qall
+    nvim --headless +'CocInstall coc-pyright' +qall
 fi
