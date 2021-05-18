@@ -135,3 +135,14 @@ ga() {
 }
 
 gcm() { git commit -m "$1"; }
+
+gd() { git diff "$1"; }
+
+vimpy() {
+    nohup jupyter qtconsole > /dev/null 2>&1 &
+    sleep 2
+    tmp=$(xdotool search --onlyvisible --name jupyter)
+    xdotool windowsize $tmp 960 1080
+    xdotool windowmove $tmp 960 30
+    nvim $1
+}

@@ -25,6 +25,9 @@ Plug 'Vimjas/vim-python-pep8-indent'
 " autocomplete
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+" jupyter-vim
+Plug 'jupyter-vim/jupyter-vim'
+
 call plug#end()
 
 " Load Gruvbox
@@ -110,3 +113,14 @@ inoremap <silent><expr> <Tab>
     \ coc#refresh()
 
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+" .............................................................................
+" jupyter-vim/jupyter-vim
+" .............................................................................
+augroup python_execute
+    au!
+    au FileType python nmap <leader>J :JupyterConnect<CR>
+    au FileType python nmap <leader>I :PythonImportThisFile<CR>
+    au FileType python nmap <leader>a :JupyterSendRange<CR>
+    au FileType python xmap <leader>a <Plug>JupyterRunVisual
+augroup END
