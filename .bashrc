@@ -128,6 +128,7 @@ alias l.='ls -d .* --color=auto'
 alias gs='git status'
 alias push='git push'
 alias pull='git pull'
+alias sa='source env/bin/activate'
 
 ga() {
     option=${2:-''}
