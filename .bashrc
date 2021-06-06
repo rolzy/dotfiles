@@ -115,6 +115,8 @@ export PATH="$HOME/gems/bin:$PATH"
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:/home/roland/go/bin
 export PATH=$PATH:/home/rolzy/.local/bin
+export VISUAL=nvim
+export EDITOR="$VISUAL"
 
 # Colorize ls output
 alias ls='ls --color'
