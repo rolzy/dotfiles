@@ -37,9 +37,20 @@ hi Normal guibg=NONE ctermbg=NONE
 " .............................................................................
 " junegunn/fzf
 " .............................................................................
+function! GFilesFallback()
+  let output = system('git rev-parse --show-toplevel') " Is there a faster way?
+  let prefix = get(g:, 'fzf_command_prefix', '')
+  if v:shell_error == 0
+    exec "normal :" . prefix . "GFiles --exclude-standard --cached --others\<CR>"
+  else
+    exec "normal :" . prefix . "Files\<CR>"
+  endif
+  return 0
+endfunction
+
 " Use CtrlP for fzf filesearch
 " Use CtrlG for fzf grepping
-nnoremap <C-p> :GFiles<CR>
+nnoremap <C-p> :call GFilesFallback()<CR>
 nnoremap <C-g> :Ag<CR>
 
 " .............................................................................

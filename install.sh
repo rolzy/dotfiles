@@ -10,6 +10,7 @@ sudo apt-get update && sudo apt-get install -y \
     rsync \
     tmux \
     unzip \
+    ripgrep \
     virtualenv \
     silversearcher-ag
 
