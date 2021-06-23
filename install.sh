@@ -11,7 +11,7 @@ sudo pacman -Syu && sudo pacman -S \
     tmux \
     unzip \
     ripgrep \
-    silversearcher-ag \
+    the_silver_searcher \
     neovim \
     nodejs \
     npm
