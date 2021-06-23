@@ -2,7 +2,7 @@ version=${1:-'simple'}
 
 ln -nsf ~/dotfiles/.bashrc ~/.bashrc
 ln -nsf ~/dotfiles/.tmux.conf ~/.tmux.conf
-sudo pacman -Syu && sudo pacman -S \
+sudo pacman -Syu && sudo pacman -S --needed \
     curl \
     git \
     gnupg \
