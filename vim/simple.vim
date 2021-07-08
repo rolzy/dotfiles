@@ -37,3 +37,11 @@ nnoremap <C-l> <C-w><C-l>
 nnoremap <C-h> <C-w><C-h>
 nnoremap <C-k> <C-w><C-k>
 nnoremap <C-j> <C-w><C-j>
+
+" Terminal hotkeys
+nmap <leader>t :terminal<CR>
+tnoremap <Esc> <C-\><C-n>
+
+" Copy paste using system clipboard
+vnoremap <C-c> "+y
+map <C-p> "+P

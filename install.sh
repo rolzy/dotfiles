@@ -1,6 +1,9 @@
 version=${1:-'simple'}
 
 ln -nsf ~/dotfiles/.bashrc ~/.bashrc
+ln -nsf ~/dotfiles/.tmux.conf ~/.tmux.conf
+ln -nsf ~/dotfiles/.gitconfig ~/.gitconfig
+
 sudo apt-get update && sudo apt-get install -y \
     curl \
     git \
@@ -37,14 +40,14 @@ if [ "$version" == "full" ]; then
     git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install
 
     # Install nodejs/yarn
-    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-    echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-    sudo apt update && sudo apt install yarn
     curl -sL https://deb.nodesource.com/setup_12.x -o nodesource_setup.sh
     sudo bash nodesource_setup.sh
     sudo apt install nodejs
 
+    # Install yarn
+    sudo npm i -g yarn pyright bash-language-server
+
     # Install vim extensions
     nvim --headless +PlugInstall +qall
-    nvim --headless +'CocInstall coc-pyright' +qall
+    nvim --headless +'TSInstall python bash' +qall
 fi
