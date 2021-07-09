@@ -44,4 +44,4 @@ tnoremap <Esc> <C-\><C-n>
 
 " Copy paste using system clipboard
 vnoremap <C-c> "+y
-map <C-v> "+P
+map <C-p> "+P

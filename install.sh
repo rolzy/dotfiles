@@ -2,6 +2,8 @@ version=${1:-'simple'}
 
 ln -nsf ~/dotfiles/.bashrc ~/.bashrc
 ln -nsf ~/dotfiles/.tmux.conf ~/.tmux.conf
+ln -nsf ~/dotfiles/.gitconfig ~/.gitconfig
+
 sudo pacman -Syu && sudo pacman -S --needed \
     curl \
     git \
@@ -35,8 +37,9 @@ if [ "$version" == "full" ]; then
     git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install
 
     # Install yarn
-    sudo npm install --global yarn
+    sudo npm i -g yarn pyright bash-language-server
 
     # Install vim extensions
     nvim --headless +PlugInstall +qall
+    nvim --headless +'TSInstall python bash' +qall
 fi
