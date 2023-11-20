@@ -1,0 +1,6 @@
+{
+    "uuid": "solar@rolzy.net",
+    "name": "Solar status",
+    "description": "Notify the Solar status",
+    "icon": "solar"
+}

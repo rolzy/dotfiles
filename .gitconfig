@@ -1,0 +1,9 @@
+[user]
+	email = Roland.Thompson@riotinto.com
+	name = Roland Thompson
+[credential]
+	helper = store
+[core]
+	editor = nvim
+[http]
+	postBuffer = 1048576000
