@@ -5,3 +5,8 @@
 	editor = nvim
 [http]
 	postBuffer = 1048576000
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
