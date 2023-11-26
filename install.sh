@@ -1,8 +1,12 @@
+# Make soft simlinks of rc files to home directory
 ln -nsf ~/dotfiles/.zshrc ~/.zshrc
 ln -nsf ~/dotfiles/.tmux.conf ~/.tmux.conf
 ln -nsf ~/dotfiles/.gitconfig ~/.gitconfig
 ln -nsf ~/dotfiles/nvim ~/.config/nvim
 ln -s ~/dotfiles/scripts/* ~/.local/bin/
+
+# Copy a template of .env file to the home directory
+cp ~/dotfiles/.env.template ~/.env
 
 # Use latest neovim versions
 sudo add-apt-repository ppa:neovim-ppa/unstable

@@ -148,9 +148,12 @@ if command -v pyenv 1>/dev/null 2>&1; then
 fi
 
 eval $(thefuck --alias f)
-export OPENAI_API_KEY=""
 export REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
 export BROWSER=wslview
+
 # Install Ruby Gems to ~/gems
 export GEM_HOME="$HOME/gems"
 export PATH="$HOME/gems/bin:$PATH"
+
+# If .env file exists in the home directory, use that to set API key variables
+[ -f ~/.env ] && source ~/.env
