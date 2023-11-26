@@ -151,3 +151,6 @@ eval $(thefuck --alias f)
 export OPENAI_API_KEY=""
 export REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
 export BROWSER=wslview
+# Install Ruby Gems to ~/gems
+export GEM_HOME="$HOME/gems"
+export PATH="$HOME/gems/bin:$PATH"
