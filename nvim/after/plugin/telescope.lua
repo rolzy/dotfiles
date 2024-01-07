@@ -1,12 +1,18 @@
-local utils = require('telescope.utils')
-local builtin = require('telescope.builtin')
-_G.project_files = function()
-    local _, ret, _ = utils.get_os_command_output({ 'git', 'rev-parse', '--is-inside-work-tree' }) 
-    if ret == 0 then 
-        builtin.git_files() 
-    else
-        builtin.find_files()
-    end 
-end 
+require("telescope").setup { 
+    pickers = {
+        live_grep = {
+            file_ignore_patterns = { 'node_modules', '.git/', 'env/' },
+            additional_args = function(_)
+                return { "--hidden" }
+            end
+        },
+        find_files = {
+            file_ignore_patterns = { 'node_modules', '.git/', 'env/' },
+            hidden = true
+        },
+    }
+}
+
+local builtin = require("telescope.builtin")
 vim.keymap.set('n', '<C-p>', builtin.find_files, {noremap=true})
 vim.keymap.set('n', '<C-g>', builtin.live_grep, {})

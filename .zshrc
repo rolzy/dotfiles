@@ -154,6 +154,12 @@ export BROWSER=wslview
 # Install Ruby Gems to ~/gems
 export GEM_HOME="$HOME/gems"
 export PATH="$HOME/gems/bin:$PATH"
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
 
 # If .env file exists in the home directory, use that to set API key variables
-[ -f ~/.env ] && source ~/.env
+if [[ -f ~/.env ]]; then
+    set -a
+    source ~/.env
+    set +a
+fi

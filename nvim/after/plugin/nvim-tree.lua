@@ -25,6 +25,9 @@ require("nvim-tree").setup({
             quit_on_open = false
         }
     },
+    update_focused_file = {
+      enable = true,
+    },
     view = {
         width = 50,
         relativenumber = true
