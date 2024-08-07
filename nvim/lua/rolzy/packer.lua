@@ -79,6 +79,7 @@ return require('packer').startup(function(use)
 
   use 'tpope/vim-surround'
   use 'tpope/vim-repeat'
+  use 'tpope/vim-sleuth'
 
   use 'zbirenbaum/copilot.lua'
   use 'zbirenbaum/copilot-cmp'

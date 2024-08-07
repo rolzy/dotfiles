@@ -210,6 +210,11 @@ _G.packer_plugins = {
     path = "/home/rolzy/.local/share/nvim/site/pack/packer/start/vim-repeat",
     url = "https://github.com/tpope/vim-repeat"
   },
+  ["vim-sleuth"] = {
+    loaded = true,
+    path = "/home/rolzy/.local/share/nvim/site/pack/packer/start/vim-sleuth",
+    url = "https://github.com/tpope/vim-sleuth"
+  },
   ["vim-surround"] = {
     loaded = true,
     path = "/home/rolzy/.local/share/nvim/site/pack/packer/start/vim-surround",

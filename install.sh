@@ -1,3 +1,7 @@
+# Make sure directories exist
+mkdir -p ~/.config
+mkdir -p ~/.local/bin
+
 # Make soft simlinks of rc files to home directory
 ln -nsf ~/dotfiles/.zshrc ~/.zshrc
 ln -nsf ~/dotfiles/.tmux.conf ~/.tmux.conf
@@ -24,7 +28,12 @@ sudo apt update && sudo apt install -y \
     zsh \
     ripgrep \
     python3-pip \
-    zplug
+    zplug \
+    fontconfig \
+    nodejs \
+    ruby-full \
+    build-essential \
+    zlib1g-dev
 
 # Install Node v20
 sudo mkdir -p /etc/apt-keyrings
@@ -43,7 +52,7 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install
 
 # Install nerd font
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/DejaVuSansMono.zip
-unzip DroidSansMono.zip -d ~/.fonts
+unzip DejaVuSansMono.zip -d ~/.fonts
 fc-cache -fv
 
 # Setup packer
@@ -55,4 +64,7 @@ curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/instal
 chsh -s /bin/zsh
 
 # Install thefuck
-pip3 install thefuck --user
+pip3 install thefuck shell-gpt --user
+
+# Install jekyll and bundler for blog
+gem install jekyll bundler
