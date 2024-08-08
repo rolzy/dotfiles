@@ -10,12 +10,11 @@ require('mason-lspconfig').setup({
 })
 
 lsp.new_client({
-  name = 'cfnls',
-  cmd = {'/home/rolzy/.local/bin/cfn-lsp-extra'},
-  filetypes = {'yaml.cloudformation'},
-  root_dir = function()
-    return lsp.dir.find_first({'.git'})
-  end
+    cmd = { os.getenv("HOME") .. '/.local/bin/cfn-lsp-extra' },
+    filetypes = { 'yaml.cloudformation', 'json.cloudformation' },
+    root_dir = function(fname)
+      return require('lspconfig').util.find_git_ancestor(fname) or vim.fn.getcwd()
+    end
 })
 
 lsp.configure('yamlls', {
@@ -85,7 +84,7 @@ cmp.setup({
 
         --- These are the default sources for lsp-zero
         {name = 'path'},
-        {name = 'nvim_lsp', keyword_length = 3},
+        {name = 'nvim_lsp', priority = 5000000},
         {name = 'buffer', keyword_length = 3},
         {name = 'luasnip', keyword_length = 2},
     },

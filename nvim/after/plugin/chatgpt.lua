@@ -12,3 +12,4 @@ require("chatgpt").setup({
     },
 })
 vim.keymap.set("n", "<leader>c", vim.cmd.ChatGPT);
+vim.keymap.set("v", "<leader>e", "<cmd>ChatGPTRun explain_code<CR>");
