@@ -25,3 +25,7 @@ vim.keymap.set("n", "<leader>oo", ":ObsidianOpen<CR>")
 vim.keymap.set("n", "<leader>on", make_new_note_with_title)
 vim.keymap.set("n", "<leader>ob", ":ObsidianBacklinks<CR>")
 vim.keymap.set("v", "<leader>ol", ":ObsidianLinkNew<CR>")
+
+-- Remap tab and S-tab to indent in insert mode
+vim.keymap.set("i", "<Tab>", "<C-t>")
+vim.keymap.set("i", "<S-Tab>", "<C-d>")

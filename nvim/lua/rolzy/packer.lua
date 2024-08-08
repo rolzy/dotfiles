@@ -93,4 +93,7 @@ return require('packer').startup(function(use)
       "nvim-lua/plenary.nvim",
     }
   }
+
+  -- Bullets
+  use 'bullets-vim/bullets.vim'
 end)

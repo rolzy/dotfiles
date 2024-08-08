@@ -84,6 +84,11 @@ _G.packer_plugins = {
     path = "/home/rolzy/.local/share/nvim/site/pack/packer/start/LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
   },
+  ["bullets.vim"] = {
+    loaded = true,
+    path = "/home/rolzy/.local/share/nvim/site/pack/packer/start/bullets.vim",
+    url = "https://github.com/bullets-vim/bullets.vim"
+  },
   ["cmp-buffer"] = {
     loaded = true,
     path = "/home/rolzy/.local/share/nvim/site/pack/packer/start/cmp-buffer",
