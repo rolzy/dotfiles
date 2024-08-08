@@ -96,4 +96,10 @@ return require('packer').startup(function(use)
 
   -- Bullets
   use 'bullets-vim/bullets.vim'
+  -- Harpoon
+  use {
+    "ThePrimeagen/harpoon",
+    branch = "harpoon2",
+    requires = { "nvim-lua/plenary.nvim" }
+  }
 end)

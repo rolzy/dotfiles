@@ -91,6 +91,8 @@ alias cpi='sudo config-proxy.sh -n internal'
 alias cpe='sudo config-proxy.sh -n external'
 alias gpt='sgpt'
 alias code='/mnt/c/Users/roland.thompson/AppData/Local/Programs/Microsoft\ VS\ Code/bin/code'
+alias diff='kompare'
+alias clip='/mnt/c/Windows/System32/clip.exe'
 
 ga() {
     option=${2:-''}
@@ -101,6 +103,8 @@ gcm() { git commit -m "$1"; }
 
 gd() { git diff "$1"; }
 
+gcs() {gh copilot suggest "$1"; }
+gce() {gh copilot explain "$1"; }
 ### ZPLUG ###
 
 source ~/.zplug/init.zsh
@@ -155,6 +159,7 @@ export BROWSER=wslview
 export GEM_HOME="$HOME/gems"
 export PATH="$HOME/gems/bin:$PATH"
 export PATH="$HOME/.rbenv/bin:$PATH"
+export PATH=$PATH:/usr/local/go/bin
 eval "$(rbenv init -)"
 
 # If .env file exists in the home directory, use that to set API key variables
@@ -163,3 +168,11 @@ if [[ -f ~/.env ]]; then
     source ~/.env
     set +a
 fi
+
+# pnpm
+export PNPM_HOME="/home/rolzy/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end

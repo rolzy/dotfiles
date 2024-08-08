@@ -3,13 +3,17 @@
 	name = Roland Thompson
 [core]
 	editor = nvim
+	compression = 0
 [http]
-	postBuffer = 1048576000
+	postBuffer = 500M
+	sslVerify = false
+	maxRequestBuffer = 100M
 [filter "lfs"]
 	required = true
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
-[credential "https://github.com"]
-	helper = 
-	helper = !/usr/bin/gh auth git-credential
+[https]
+	postBuffer = 1048576000
+[credential]
+	helper = store

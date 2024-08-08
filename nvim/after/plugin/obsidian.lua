@@ -2,7 +2,7 @@ require("obsidian").setup({
   workspaces = {
     {
       name = "personal",
-      path = "/mnt/c/Users/rolan/Documents/my_vault",
+      path = "/mnt/c/Users/roland.thompson/Documents/MyVault/",
     }
   },
 
