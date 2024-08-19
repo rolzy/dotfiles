@@ -3,11 +3,12 @@ local lsp = require('lsp-zero')
 lsp.preset('recommended')
 require('mason').setup({})
 require('mason-lspconfig').setup({
-    ensure_installed = {'pyright', 'rust_analyzer', 'bashls', 'yamlls', 'lua_ls'},
+    ensure_installed = {'pyright', 'tsserver', 'bashls', 'yamlls', 'lua_ls'},
     handlers = {
         lsp.default_setup,
     }
 })
+
 
 lsp.new_client({
     cmd = { os.getenv("HOME") .. '/.local/bin/cfn-lsp-extra' },
@@ -99,6 +100,11 @@ cmp.setup({
     formatting = cmp_format
 })
 
+function HoverFixed()
+    vim.api.nvim_command('set eventignore=CursorHold')
+    vim.lsp.buf.hover()
+    vim.api.nvim_command('autocmd CursorMoved <buffer> ++once set eventignore=""')
+end
 
 lsp.on_attach(function(client, bufnr)
 	local opts = { 
@@ -108,9 +114,8 @@ lsp.on_attach(function(client, bufnr)
     lsp.default_keymaps(opts)
 
 	vim.keymap.set("n", "gd", function () vim.lsp.buf.definition() end, opts)
-	vim.keymap.set("n", "K", function () vim.lsp.buf.hover() end, opts)
-    vim.keymap.set("n", "gi", "gi", opts)
-	vim.keymap.set("i", "<C-h>", function () vim.lsp.buf.signature_help() end, opts)
+	vim.keymap.set("n", "K", HoverFixed, opts)
+	vim.keymap.set("n", "gi", "gi", opts)
 end)
 
 vim.opt.signcolumn = 'yes'
