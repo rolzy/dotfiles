@@ -68,12 +68,22 @@ return require('packer').startup(function(use)
 
   use 'b0o/schemastore.nvim'
 
+  -- use {
+  --   "jackMort/ChatGPT.nvim",
+  --   requires = {
+  --     "MunifTanjim/nui.nvim",
+  --     "nvim-lua/plenary.nvim",
+  --     "nvim-telescope/telescope.nvim"
+  --   }
+  -- }
+
   use {
-    "jackMort/ChatGPT.nvim",
+    "yetone/avante.nvim",
     requires = {
-      "MunifTanjim/nui.nvim",
+      "nvim-tree/nvim-web-devicons",
+      "stevearc/dressing.nvim",
       "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope.nvim"
+      "MunifTanjim/nui.nvim"
     }
   }
 
