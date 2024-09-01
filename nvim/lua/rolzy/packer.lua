@@ -112,4 +112,9 @@ return require('packer').startup(function(use)
     branch = "harpoon2",
     requires = { "nvim-lua/plenary.nvim" }
   }
+
+  -- Formatting
+  use({
+    "stevearc/conform.nvim",
+  })
 end)
