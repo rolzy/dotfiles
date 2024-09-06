@@ -5,7 +5,7 @@ require('mason').setup({})
 require('mason-lspconfig').setup({
     ensure_installed = {
 	'pyright',
-	'tsserver',
+	'typescript-language-server',
 	'bashls',
 	'yamlls',
 	'lua_ls',

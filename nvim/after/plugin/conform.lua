@@ -1,11 +1,11 @@
 require('conform').setup({
   formatters_by_ft = {
-    lua = { 'stylua' },
     css = { 'prettier' },
     html = { 'prettier' },
     javascript = { 'prettier' },
     typescript = { 'prettier' },
     typescriptreact = { 'prettier' },
+    python = { 'ruff' }
   },
 
   format_on_save = {
