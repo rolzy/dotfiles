@@ -160,6 +160,7 @@ export GEM_HOME="$HOME/gems"
 export PATH="$HOME/gems/bin:$PATH"
 export PATH="$HOME/.rbenv/bin:$PATH"
 export PATH=$PATH:/usr/local/go/bin
+export PATH="$PATH:/opt/nvim-linux64/bin"
 eval "$(rbenv init -)"
 
 # If .env file exists in the home directory, use that to set API key variables

@@ -1,8 +1,19 @@
 require("avante").setup({
-  provider = "openai",
-  openai = {
-    endpoint = "https://api.openai.com/v1",
-    model = "gpt-4",
+  -- provider = "openai",
+  -- openai = {
+  --   endpoint = "https://api.openai.com/v1",
+  --   model = "gpt-4",
+  --   timeout = 30000, -- Timeout in milliseconds
+  --   temperature = 0,
+  --   max_tokens = 4096,
+  --   ["local"] = false,
+  -- },
+  provider = "azure",
+  azure = {
+    endpoint = "https://oairtdsdevsusdnamlopsptu01.openai.azure.com/",
+    deployment = "gpt-4o",
+    model = "gpt-4o",
+    api_version = "2024-06-01",
     timeout = 30000, -- Timeout in milliseconds
     temperature = 0,
     max_tokens = 4096,

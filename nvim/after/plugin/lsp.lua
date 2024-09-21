@@ -5,19 +5,32 @@ require('mason').setup({})
 require('mason-lspconfig').setup({
     ensure_installed = {
 	'pyright',
-	'typescript-language-server',
+	'tsserver',
 	'bashls',
 	'yamlls',
-	'lua_ls',
-	'css-lsp',
-	'eslint-lsp',
-	'html-lsp'
+	'lua_ls'
     },
     handlers = {
         lsp.default_setup,
     }
 })
 
+require("mason-lspconfig").setup_handlers({
+	-- Will be called for each installed server that doesn't have
+	-- a dedicated handler.
+	--
+	function(server_name) -- default handler (optional)
+		-- https://github.com/neovim/nvim-lspconfig/pull/3232
+		if server_name == "tsserver" then
+			server_name = "ts_ls"
+		end
+		local capabilities = require("cmp_nvim_lsp").default_capabilities()
+		require("lspconfig")[server_name].setup({
+
+			capabilities = capabilities,
+		})
+	end,
+})
 
 lsp.new_client({
     cmd = { os.getenv("HOME") .. '/.local/bin/cfn-lsp-extra' },

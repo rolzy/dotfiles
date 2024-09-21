@@ -17,3 +17,5 @@
 	postBuffer = 1048576000
 [credential]
 	helper = store
+[push]
+	followTags = true
