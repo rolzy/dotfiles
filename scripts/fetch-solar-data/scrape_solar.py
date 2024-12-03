@@ -1,12 +1,12 @@
-import os
 import base64
-from dotenv import load_dotenv
+import os
 
+from dotenv import load_dotenv
 from selenium import webdriver
-from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
 
 load_dotenv()
 
@@ -49,12 +49,16 @@ print("Wrote daily yield to file")
 driver.find_element(By.CLASS_NAME, "plant-avatar").click()
 
 # Wait for the daily production curve to display, then save the canvas as an image
-wait.until(EC.visibility_of_element_located((By.XPATH, "//*[@id='chart']/div[1]/canvas")))
+wait.until(
+    EC.visibility_of_element_located((By.XPATH, "//*[@id='chart']/div[1]/canvas"))
+)
 canvas = driver.find_element(By.XPATH, "//*[@id='chart']/div[1]/canvas")
 print("Found daily yield chart")
 
 # Get the canvas as a PNG image
-canvas_base64 = driver.execute_script("return arguments[0].toDataURL('image/png').substring(21);", canvas)
+canvas_base64 = driver.execute_script(
+    "return arguments[0].toDataURL('image/png').substring(21);", canvas
+)
 canvas_png = base64.b64decode(canvas_base64)
 with open("/home/rolzy/dotfiles/scripts/fetch-solar-data/canvas.png", "wb") as f:
     f.write(canvas_png)

@@ -1,4 +1,11 @@
 require("avante").setup({
+  provider = "claude",
+  claude = {
+    endpoint = "https://api.anthropic.com",
+    model = "claude-3-5-sonnet-20240620",
+    temperature = 0,
+    max_tokens = 4096,
+  },
   -- provider = "openai",
   -- openai = {
   --   endpoint = "https://api.openai.com/v1",
@@ -8,17 +15,17 @@ require("avante").setup({
   --   max_tokens = 4096,
   --   ["local"] = false,
   -- },
-  provider = "azure",
-  azure = {
-    endpoint = "https://oairtdsdevsusdnamlopsptu01.openai.azure.com/",
-    deployment = "gpt-4o",
-    model = "gpt-4o",
-    api_version = "2024-06-01",
-    timeout = 30000, -- Timeout in milliseconds
-    temperature = 0,
-    max_tokens = 4096,
-    ["local"] = false,
-  },
+  -- provider = "azure",
+  -- azure = {
+  --   endpoint = "https://oairtdsdevsusdnamlopsptu01.openai.azure.com/",
+  --   deployment = "gpt-4o",
+  --   model = "gpt-4o",
+  --   api_version = "2024-06-01",
+  --   timeout = 30000, -- Timeout in milliseconds
+  --   temperature = 0,
+  --   max_tokens = 4096,
+  --   ["local"] = false,
+  -- },
   mappings = {
     ask = "<leader>c",
     edit = "<leader>ae",

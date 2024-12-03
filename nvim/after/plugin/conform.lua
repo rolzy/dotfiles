@@ -5,7 +5,14 @@ require('conform').setup({
     javascript = { 'prettier' },
     typescript = { 'prettier' },
     typescriptreact = { 'prettier' },
-    python = { 'ruff' }
+    terraform = { 'tflint' },
+    python = { 'ruff_fix', 'ruff_format', 'ruff_organize_imports' }
+  },
+
+  formatters = {
+    ruff_fix = {
+      args = { "--ignore", "F401" }
+    }
   },
 
   format_on_save = {

@@ -35,6 +35,7 @@ return require('lazy').setup({
     'rebelot/kanagawa.nvim',
     as = 'kanagawa',
     config = function()
+        vim.cmd('autocmd ColorScheme * highlight Normal ctermbg=NONE guibg=NONE')
         vim.cmd('colorscheme kanagawa')
     end
   },

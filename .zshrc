@@ -92,7 +92,7 @@ alias cpe='sudo config-proxy.sh -n external'
 alias gpt='sgpt'
 alias code='/mnt/c/Users/roland.thompson/AppData/Local/Programs/Microsoft\ VS\ Code/bin/code'
 alias diff='kompare'
-alias clip='/mnt/c/Windows/System32/clip.exe'
+#alias clip='/mnt/c/Windows/System32/clip.exe'
 
 ga() {
     option=${2:-''}
@@ -177,3 +177,7 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+#
+export XMODIFIERS=@im=fcitx
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx

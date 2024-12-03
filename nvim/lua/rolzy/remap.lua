@@ -9,7 +9,8 @@ vim.keymap.set("n", "N", "Nzzzv")
 
 vim.keymap.set("x", "<leader>p", "\"_dP")
 
-vim.keymap.set("v", "<C-c>", "y:tabnew ~/.vimbuffer<CR>VGp:x<CR> | :!cat ~/.vimbuffer | /mnt/c/Windows/System32/clip.exe <CR><CR>")
+--vim.keymap.set("v", "<C-c>", "y:tabnew ~/.vimbuffer<CR>VGp:x<CR> | :!cat ~/.vimbuffer | /mnt/c/Windows/System32/clip.exe <CR><CR>")
+vim.keymap.set("v", "<C-c>", "y:tabnew ~/.vimbuffer<CR>VGp:x<CR> | :!cat ~/.vimbuffer | wl-copy <CR><CR>")
 
 vim.keymap.set("n", "<leader>d", "\"_d")
 vim.keymap.set("v", "<leader>d", "\"_d")

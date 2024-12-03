@@ -15,6 +15,9 @@ cp ~/dotfiles/.env.template ~/.env
 # Use latest neovim versions
 sudo add-apt-repository ppa:neovim-ppa/unstable
 
+# Add packagecloud to install git-lfs
+curl https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash -
+
 # Install dependencies
 sudo apt update && sudo apt install -y \
     curl \
@@ -33,16 +36,13 @@ sudo apt update && sudo apt install -y \
     nodejs \
     ruby-full \
     build-essential \
-    zlib1g-dev
+    zlib1g-dev \
+    git-lfs \
+    pipx
 
-# Install Node v20
-sudo mkdir -p /etc/apt-keyrings
-curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
-NODE_MAJOR=20
-echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list
-sudo apt update && sudo apt install -y \
-    nodejs \
-    npm
+# Install Node v21
+curl -fsSL https://deb.nodesource.com/setup_21.x | sudo -E bash -
+sudo apt-get install -y nodejs
 
 # Install tpm
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
@@ -55,16 +55,9 @@ wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/DejaVuSans
 unzip DejaVuSansMono.zip -d ~/.fonts
 fc-cache -fv
 
-# Setup packer
-git clone --depth 1 https://github.com/wbthomason/packer.nvim\
- ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-
 # Install zsh and make it the default shell
 curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
 chsh -s /bin/zsh
 
 # Install thefuck
 pip3 install thefuck shell-gpt --user
-
-# Install jekyll and bundler for blog
-gem install jekyll bundler
