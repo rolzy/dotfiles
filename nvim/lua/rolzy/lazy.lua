@@ -94,7 +94,10 @@ return require('lazy').setup({
 
   {
     "yetone/avante.nvim",
-    build = 'make',
+    event = "VeryLazy",
+    lazy = false,
+    version = false,
+    build = 'make BUILD_FROM_SOURCE=true',
     dependencies = {
       "nvim-tree/nvim-web-devicons",
       "stevearc/dressing.nvim",

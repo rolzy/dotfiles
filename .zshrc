@@ -77,6 +77,7 @@ echo -ne '\e[5 q' # Use beam shape cursor on startup.
 preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 
 ### ALIASES ###
+alias c="clear"
 alias pip="pip3"
 alias python="python3"
 alias vim="nvim"
@@ -153,6 +154,7 @@ fi
 
 eval $(thefuck --alias f)
 export REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
+export NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt
 export BROWSER=wslview
 
 # Install Ruby Gems to ~/gems
@@ -177,7 +179,6 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
-#
-export XMODIFIERS=@im=fcitx
-export GTK_IM_MODULE=fcitx
-export QT_IM_MODULE=fcitx
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/bin/terraform terraform

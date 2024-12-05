@@ -15,17 +15,17 @@ require("avante").setup({
   --   max_tokens = 4096,
   --   ["local"] = false,
   -- },
-  -- provider = "azure",
-  -- azure = {
-  --   endpoint = "https://oairtdsdevsusdnamlopsptu01.openai.azure.com/",
-  --   deployment = "gpt-4o",
-  --   model = "gpt-4o",
-  --   api_version = "2024-06-01",
-  --   timeout = 30000, -- Timeout in milliseconds
-  --   temperature = 0,
-  --   max_tokens = 4096,
-  --   ["local"] = false,
-  -- },
+  provider = "azure",
+  azure = {
+    endpoint = "https://oairtdsdevsusdnamlopsptu02.openai.azure.com/",
+    deployment = "gpt-4o",
+    -- model = "gpt-4o",
+    api_version = "2024-06-01",
+    timeout = 30000, -- Timeout in milliseconds
+    temperature = 0,
+    max_tokens = 4096,
+    ["local"] = false,
+  },
   mappings = {
     ask = "<leader>c",
     edit = "<leader>ae",
