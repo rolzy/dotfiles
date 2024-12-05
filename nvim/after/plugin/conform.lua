@@ -1,4 +1,5 @@
 require('conform').setup({
+  notify_on_error = false,
   formatters_by_ft = {
     css = { 'prettier' },
     html = { 'prettier' },
@@ -11,7 +12,7 @@ require('conform').setup({
 
   formatters = {
     ruff_fix = {
-      args = { "--ignore", "F401" }
+      args = { "check", "--ignore", "F401" }
     }
   },
 
