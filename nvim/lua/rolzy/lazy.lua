@@ -23,14 +23,12 @@ return require('lazy').setup({
     dependencies = { {'nvim-lua/plenary.nvim'} }
   },
 
-  -- Colerschemes
-  -- use({
-  --   'rose-pine/neovim',
-  --   as = 'rose-pine',
-  --   config = function()
-  --       vim.cmd('colorscheme rose-pine')
-  --   end
-  -- })
+  {
+    'nvim-treesitter/nvim-treesitter',
+    build = ':TSUpdate'
+  },
+
+  -- Colorscheme for 2024 - Kanagawa
   {
     'rebelot/kanagawa.nvim',
     as = 'kanagawa',
@@ -40,11 +38,7 @@ return require('lazy').setup({
     end
   },
 
-  {
-    'nvim-treesitter/nvim-treesitter',
-    build = ':TSUpdate'
-  },
-
+  -- File tree for 2025 - neotree
   {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v3.x",
@@ -54,6 +48,20 @@ return require('lazy').setup({
       "MunifTanjim/nui.nvim",
       -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
     }
+  },
+
+  {
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+    keys = {
+      {
+        "<leader>?",
+        function()
+          require("which-key").show({ global = false })
+        end,
+        desc = "Buffer Local Keymaps (which-key)",
+      },
+    },
   },
 
   {
@@ -114,6 +122,7 @@ return require('lazy').setup({
 
   -- Bullets
   'bullets-vim/bullets.vim',
+
   -- Harpoon
   {
     "ThePrimeagen/harpoon",
