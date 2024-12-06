@@ -6,7 +6,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
   if vim.v.shell_error ~= 0 then
     vim.api.nvim_echo({
       { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-      { out, "WarningMsg" },
+      { out,                            "WarningMsg" },
       { "\nPress any key to exit..." },
     }, true, {})
     vim.fn.getchar()
@@ -19,8 +19,9 @@ vim.g.mapleader = " "
 
 return require('lazy').setup({
   {
-    'nvim-telescope/telescope.nvim', tag = '0.1.4',
-    dependencies = { {'nvim-lua/plenary.nvim'} }
+    'nvim-telescope/telescope.nvim',
+    tag = '0.1.4',
+    dependencies = { { 'nvim-lua/plenary.nvim' } }
   },
 
   {
@@ -33,10 +34,17 @@ return require('lazy').setup({
     'rebelot/kanagawa.nvim',
     as = 'kanagawa',
     config = function()
-        vim.cmd('autocmd ColorScheme * highlight Normal ctermbg=NONE guibg=NONE')
-        vim.cmd('colorscheme kanagawa')
+      vim.cmd('autocmd ColorScheme * highlight Normal ctermbg=NONE guibg=NONE')
+      vim.cmd('colorscheme kanagawa')
     end
   },
+  --
+  -- {
+  --   "0xstepit/flow.nvim",
+  --   lazy = false,
+  --   priority = 1000,
+  --   opts = {},
+  -- },
 
   -- File tree for 2025 - neotree
   {
@@ -63,28 +71,40 @@ return require('lazy').setup({
       },
     },
   },
+  {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    dependencies = {
+      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+      "MunifTanjim/nui.nvim",
+      -- OPTIONAL:
+      --   `nvim-notify` is only needed, if you want to use the notification view.
+      --   If not available, we use `mini` as the fallback
+      "rcarriga/nvim-notify",
+    }
+  },
 
   {
     'VonHeikemen/lsp-zero.nvim',
     branch = 'v3.x',
     dependencies = {
       -- LSP Support
-      {'neovim/nvim-lspconfig'},
-      {'williamboman/mason.nvim'},
-      {'williamboman/mason-lspconfig.nvim'},
+      { 'neovim/nvim-lspconfig' },
+      { 'williamboman/mason.nvim' },
+      { 'williamboman/mason-lspconfig.nvim' },
 
       -- Autocompletion
-      {'hrsh7th/nvim-cmp'},
-      {'hrsh7th/cmp-buffer'},
-      {'hrsh7th/cmp-path'},
-      {'saadparwaiz1/cmp_luasnip'},
-      {'hrsh7th/cmp-nvim-lsp'},
-      {'hrsh7th/cmp-nvim-lua'},
-      {'windwp/nvim-autopairs'},
-      {'ray-x/lsp_signature.nvim'},
+      { 'hrsh7th/nvim-cmp' },
+      { 'hrsh7th/cmp-buffer' },
+      { 'hrsh7th/cmp-path' },
+      { 'saadparwaiz1/cmp_luasnip' },
+      { 'hrsh7th/cmp-nvim-lsp' },
+      { 'hrsh7th/cmp-nvim-lua' },
+      { 'windwp/nvim-autopairs' },
+      { 'ray-x/lsp_signature.nvim' },
 
       -- Snippets
-      {'L3MON4D3/LuaSnip'},
+      { 'L3MON4D3/LuaSnip' },
       -- {'rafamadriz/friendly-snippets'},
       -- {'saadparwaiz1/cmp_luasnip'}
     }
@@ -116,7 +136,7 @@ return require('lazy').setup({
   -- Obsidian
   {
     'epwalsh/obsidian.nvim',
-    version = "*",  -- recommended, use latest release instead of latest commit
+    version = "*", -- recommended, use latest release instead of latest commit
     dependencies = {
       -- Required.
       "nvim-lua/plenary.nvim",
