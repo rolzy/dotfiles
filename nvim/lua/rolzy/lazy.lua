@@ -49,13 +49,27 @@ return require('lazy').setup({
   -- File tree for 2025 - neotree
   {
     "nvim-neo-tree/neo-tree.nvim",
+    -- Open neo-tree in full screen when opening a directory
+    -- https://www.reddit.com/r/neovim/comments/195mfz2/open_only_neotree_when_opening_a_directory/
+    init = function()
+      if vim.fn.argc(-1) == 1 then
+        local stat = vim.loop.fs_stat(vim.fn.argv(0))
+        if stat and stat.type == "directory" then
+          require("neo-tree").setup({
+            filesystem = {
+              hijack_netrw_behavior = "open_current",
+            },
+          })
+        end
+      end
+    end,
     branch = "v3.x",
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
       "MunifTanjim/nui.nvim",
       -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
-    }
+    },
   },
 
   {
@@ -117,7 +131,7 @@ return require('lazy').setup({
     event = "VeryLazy",
     lazy = false,
     version = false,
-    build = 'make BUILD_FROM_SOURCE=true',
+    build = 'make',
     dependencies = {
       "nvim-tree/nvim-web-devicons",
       "stevearc/dressing.nvim",
@@ -154,5 +168,36 @@ return require('lazy').setup({
   },
 
   -- Formatting
-  "stevearc/conform.nvim"
+  {
+    "stevearc/conform.nvim"
+  },
+
+  -- Debugging
+  {
+    "mfussenegger/nvim-dap",
+    dependencies = {
+      "rcarriga/nvim-dap-ui",
+      "theHamsta/nvim-dap-virtual-text",
+      "nvim-neotest/nvim-nio",
+    }
+  },
+  "mfussenegger/nvim-dap-python",
+
+  -- Virtualenv selector
+  {
+    "linux-cultist/venv-selector.nvim",
+    dependencies = {
+      "neovim/nvim-lspconfig",
+      "mfussenegger/nvim-dap", "mfussenegger/nvim-dap-python",   --optional
+      { "nvim-telescope/telescope.nvim", branch = "0.1.x", dependencies = { "nvim-lua/plenary.nvim" } },
+    },
+    lazy = false,
+    branch = "regexp", -- This is the regexp branch, use this for the new version
+    config = function()
+      require("venv-selector").setup()
+    end,
+    keys = {
+      { ",v", "<cmd>VenvSelect<cr>" },
+    },
+  },
 })
