@@ -11,6 +11,7 @@ vim.keymap.set("n", "<F2>", dap.step_into, { desc = "DAP Step-Into" })
 vim.keymap.set("n", "<F3>", dap.step_over, { desc = "DAP Step-Over" })
 vim.keymap.set("n", "<F4>", dap.step_out, { desc = "DAP Step-Out" })
 vim.keymap.set("n", "<F5>", dap.step_back, { desc = "DAP Step-Back" })
+vim.keymap.set("n", "<F6>", dap.terminate, { desc = "DAP Stop" })
 vim.keymap.set("n", "<F12>", dap.restart, { desc = "DAP Restart" })
 
 dap.listeners.before.attach.dapui_config = function()

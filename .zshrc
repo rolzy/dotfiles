@@ -93,7 +93,7 @@ alias cpe='sudo config-proxy.sh -n external'
 alias gpt='sgpt'
 alias code='/mnt/c/Users/roland.thompson/AppData/Local/Programs/Microsoft\ VS\ Code/bin/code'
 alias diff='kompare'
-#alias clip='/mnt/c/Windows/System32/clip.exe'
+alias clip='/mnt/c/Windows/System32/clip.exe'
 
 ga() {
     option=${2:-''}

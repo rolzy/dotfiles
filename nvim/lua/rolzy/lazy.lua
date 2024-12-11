@@ -17,6 +17,10 @@ vim.opt.rtp:prepend(lazypath)
 
 vim.g.mapleader = " "
 
+-- Disable netrw
+vim.g.loaded_netrwPlugin = 1
+vim.g.loaded_netrw = 1
+
 return require('lazy').setup({
   {
     'nvim-telescope/telescope.nvim',
@@ -29,15 +33,21 @@ return require('lazy').setup({
     build = ':TSUpdate'
   },
 
-  -- Colorscheme for 2024 - Kanagawa
   {
-    'rebelot/kanagawa.nvim',
-    as = 'kanagawa',
-    config = function()
-      vim.cmd('autocmd ColorScheme * highlight Normal ctermbg=NONE guibg=NONE')
-      vim.cmd('colorscheme kanagawa')
-    end
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {},
   },
+  -- Colorscheme for 2024 - Kanagawa
+  -- {
+  --   'rebelot/kanagawa.nvim',
+  --   as = 'kanagawa',
+  --   config = function()
+  --     vim.cmd('autocmd ColorScheme * highlight Normal ctermbg=NONE guibg=NONE')
+  --     vim.cmd('colorscheme kanagawa')
+  --   end
+  -- },
   --
   -- {
   --   "0xstepit/flow.nvim",
@@ -51,18 +61,38 @@ return require('lazy').setup({
     "nvim-neo-tree/neo-tree.nvim",
     -- Open neo-tree in full screen when opening a directory
     -- https://www.reddit.com/r/neovim/comments/195mfz2/open_only_neotree_when_opening_a_directory/
+    cmd = 'Neotree',
     init = function()
-      if vim.fn.argc(-1) == 1 then
-        local stat = vim.loop.fs_stat(vim.fn.argv(0))
-        if stat and stat.type == "directory" then
-          require("neo-tree").setup({
-            filesystem = {
-              hijack_netrw_behavior = "open_current",
-            },
-          })
+      vim.api.nvim_create_autocmd('BufEnter', {
+        -- make a group to be able to delete it later
+        group = vim.api.nvim_create_augroup('NeoTreeInit', { clear = true }),
+        callback = function()
+          local f = vim.fn.expand('%:p')
+          if vim.fn.isdirectory(f) ~= 0 then
+            vim.cmd('Neotree current dir=' .. f)
+            -- neo-tree is loaded now, delete the init autocmd
+            vim.api.nvim_clear_autocmds { group = 'NeoTreeInit' }
+          end
         end
-      end
+      })
     end,
+    opts = {
+      filesystem = {
+        hijack_netrw_behavior = 'open_current'
+      },
+      -- Open neotree with relative line numbers
+      -- https://stackoverflow.com/questions/77927924/add-relative-line-numbers-in-neo-tree-using-lazy-in-neovim
+      event_handlers = {
+        {
+          event = "neo_tree_buffer_enter",
+          handler = function(arg)
+            vim.cmd([[
+                setlocal relativenumber
+              ]])
+          end,
+        },
+      },
+    },
     branch = "v3.x",
     dependencies = {
       "nvim-lua/plenary.nvim",
@@ -98,32 +128,92 @@ return require('lazy').setup({
     }
   },
 
+  -- LSP manager
   {
-    'VonHeikemen/lsp-zero.nvim',
-    branch = 'v3.x',
-    dependencies = {
-      -- LSP Support
-      { 'neovim/nvim-lspconfig' },
-      { 'williamboman/mason.nvim' },
-      { 'williamboman/mason-lspconfig.nvim' },
-
-      -- Autocompletion
-      { 'hrsh7th/nvim-cmp' },
-      { 'hrsh7th/cmp-buffer' },
-      { 'hrsh7th/cmp-path' },
-      { 'saadparwaiz1/cmp_luasnip' },
-      { 'hrsh7th/cmp-nvim-lsp' },
-      { 'hrsh7th/cmp-nvim-lua' },
-      { 'windwp/nvim-autopairs' },
-      { 'ray-x/lsp_signature.nvim' },
-
-      -- Snippets
-      { 'L3MON4D3/LuaSnip' },
-      -- {'rafamadriz/friendly-snippets'},
-      -- {'saadparwaiz1/cmp_luasnip'}
-    }
+    'williamboman/mason.nvim',
+    lazy = false,
+    opts = {},
   },
 
+  -- Autocompletion
+  {
+    'hrsh7th/nvim-cmp',
+    event = 'InsertEnter',
+  },
+
+  -- LSP
+  {
+    'neovim/nvim-lspconfig',
+    cmd = { 'LspInfo', 'LspInstall', 'LspStart' },
+    event = { 'BufReadPre', 'BufNewFile' },
+    dependencies = {
+      { 'hrsh7th/cmp-nvim-lsp' },
+      { 'williamboman/mason.nvim' },
+      { 'williamboman/mason-lspconfig.nvim' },
+    },
+    init = function()
+      -- Reserve a space in the gutter
+      -- This will avoid an annoying layout shift in the screen
+      vim.opt.signcolumn = 'yes'
+    end,
+    config = function()
+      local lsp_defaults = require('lspconfig').util.default_config
+
+      -- Add cmp_nvim_lsp capabilities settings to lspconfig
+      -- This should be executed before you configure any language server
+      lsp_defaults.capabilities = vim.tbl_deep_extend(
+        'force',
+        lsp_defaults.capabilities,
+        require('cmp_nvim_lsp').default_capabilities()
+      )
+
+      -- LspAttach is where you enable features that only work
+      -- if there is a language server active in the file
+      vim.api.nvim_create_autocmd('LspAttach', {
+        desc = 'LSP actions',
+        callback = function(event)
+          local opts = { buffer = event.buf }
+
+          local function HoverFixed()
+            vim.api.nvim_command('set eventignore=CursorHold')
+            vim.lsp.buf.hover()
+            vim.api.nvim_command('autocmd CursorMoved <buffer> ++once set eventignore=""')
+          end
+
+          vim.keymap.set("n", "K", HoverFixed, opts)
+          vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
+          vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
+          vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', opts)
+          vim.keymap.set('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>', opts)
+          vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
+          vim.keymap.set('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
+        end,
+      })
+
+      require('mason-lspconfig').setup({
+        ensure_installed = {},
+        automatic_installation = false,
+        handlers = {
+          -- this first function is the "default handler"
+          -- it applies to every language server without a "custom handler"
+          function(server_name)
+            require('lspconfig')[server_name].setup({})
+          end,
+        }
+      })
+    end
+  },
+
+  {
+    "L3MON4D3/LuaSnip",
+    -- follow latest release.
+    version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+    -- install jsregexp (optional!).
+    build = "make install_jsregexp"
+  },
+
+  'windwp/nvim-autopairs',
+  'ray-x/lsp_signature.nvim',
   'b0o/schemastore.nvim',
 
   {
@@ -188,7 +278,7 @@ return require('lazy').setup({
     "linux-cultist/venv-selector.nvim",
     dependencies = {
       "neovim/nvim-lspconfig",
-      "mfussenegger/nvim-dap", "mfussenegger/nvim-dap-python",   --optional
+      "mfussenegger/nvim-dap", "mfussenegger/nvim-dap-python", --optional
       { "nvim-telescope/telescope.nvim", branch = "0.1.x", dependencies = { "nvim-lua/plenary.nvim" } },
     },
     lazy = false,
@@ -199,5 +289,27 @@ return require('lazy').setup({
     keys = {
       { ",v", "<cmd>VenvSelect<cr>" },
     },
+  },
+
+  {
+    'numToStr/Comment.nvim',
+    config = function()
+      -- To avoid waiting for g@
+      vim.keymap.del('n', 'gcc')
+
+      -- Unify shortcut for normal and visual modes
+      vim.keymap.set('n', '<C-_>', function()
+        require('Comment.api').toggle.linewise.current()
+      end)
+
+      -- Preserve visual selection after toggling comment/uncomment
+      vim.keymap.set('x', '<C-_>', function()
+        local api = require 'Comment.api'
+        local esc = vim.api.nvim_replace_termcodes('<ESC>', true, false, true)
+        vim.api.nvim_feedkeys(esc, 'nx', false)
+        api.locked 'toggle.linewise' (vim.fn.visualmode())
+        vim.cmd 'normal! gv'
+      end, { desc = 'Comment toggle linewise (visual) and preserve the visual selection' })
+    end,
   },
 })

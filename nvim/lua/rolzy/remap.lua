@@ -18,5 +18,5 @@ else
 end
 
 -- Remap tab and S-tab to indent in insert mode
-vim.keymap.set("i", "<Tab>", "<C-t>")
-vim.keymap.set("i", "<S-Tab>", "<C-d>")
+-- vim.keymap.set("i", "<Tab>", "<C-t>")
+-- vim.keymap.set("i", "<S-Tab>", "<C-d>")
