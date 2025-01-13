@@ -9,4 +9,4 @@
 -- })
 -- vim.cmd("colorscheme kanagawa")
 --
-vim.cmd("colorscheme tokyonight-storm")
+vim.cmd.colorscheme "catppuccin-mocha"

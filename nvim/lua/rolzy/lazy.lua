@@ -33,12 +33,7 @@ return require('lazy').setup({
     build = ':TSUpdate'
   },
 
-  {
-    "folke/tokyonight.nvim",
-    lazy = false,
-    priority = 1000,
-    opts = {},
-  },
+  { "catppuccin/nvim", name = "catppuccin"},
   -- Colorscheme for 2024 - Kanagawa
   -- {
   --   'rebelot/kanagawa.nvim',
@@ -78,7 +73,14 @@ return require('lazy').setup({
     end,
     opts = {
       filesystem = {
-        hijack_netrw_behavior = 'open_current'
+        hijack_netrw_behavior = 'open_current',
+        filtered_items = {
+          always_show_by_pattern = {
+            ".env*",
+            ".github*",
+            ".gitignore"
+          }
+        }
       },
       -- Open neotree with relative line numbers
       -- https://stackoverflow.com/questions/77927924/add-relative-line-numbers-in-neo-tree-using-lazy-in-neovim
@@ -287,9 +289,6 @@ return require('lazy').setup({
     config = function()
       require("venv-selector").setup()
     end,
-    keys = {
-      { ",v", "<cmd>VenvSelect<cr>" },
-    },
   },
 
   {
