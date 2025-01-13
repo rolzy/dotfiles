@@ -1,0 +1,37 @@
+-- require("neo-tree").setup({
+--   -- Open neo-tree in full screen when opening a directory
+--   -- https://www.reddit.com/r/neovim/comments/195mfz2/open_only_neotree_when_opening_a_directory/
+--   init = function()
+--     vim.api.nvim_create_autocmd('BufEnter', {
+--       -- make a group to be able to delete it later
+--       group = vim.api.nvim_create_augroup('NeoTreeInit', { clear = true }),
+--       callback = function()
+--         local f = vim.fn.expand('%:p')
+--         if vim.fn.isdirectory(f) ~= 0 then
+--           vim.cmd('Neotree current dir=' .. f)
+--           -- neo-tree is loaded now, delete the init autocmd
+--           vim.api.nvim_clear_autocmds { group = 'NeoTreeInit' }
+--         end
+--       end
+--     })
+--     -- keymaps
+--   end,
+--
+--   -- Set rnu inside neo-tree
+--   -- https://stackoverflow.com/questions/77927924/add-relative-line-numbers-in-neo-tree-using-lazy-in-neovim
+--   opts = {
+--     event_handlers = {
+--       {
+--         event = "neo_tree_buffer_enter",
+--         handler = function(arg)
+--           vim.cmd([[
+--               setlocal relativenumber
+--             ]])
+--         end,
+--       },
+--     },
+--     filesystem = {
+--       hijack_netrw_behavior = 'open_current'
+--     }
+--   }
+-- })

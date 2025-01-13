@@ -3,7 +3,7 @@
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$(find ~/ ~/projects/ ~/projects/mlops/ ~/projects/gpt/ ~/projects/automation/ ~/projects/temp/ ~/projects/consulting/ ~/projects/network/ -not -path '*/.*' -type d -o -type l -maxdepth 1 | fzf)
+    selected=$(find ~/ ~/projects/ ~/projects/mlops/ ~/projects/gpt/ ~/projects/automation/ ~/projects/temp/ ~/projects/consulting/ ~/projects/network/ ~/projects/lakehouse/ -not -path '*/.*' -type d -o -type l -maxdepth 1 | fzf)
 fi
 
 if [[ -z $selected ]]; then

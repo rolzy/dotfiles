@@ -15,7 +15,7 @@ require("obsidian").setup({
       return string.format("[[%s]]", opts.id)
     end
   end,
-  
+
   -- Optional, completion.
   completion = {
     -- If using nvim-cmp, otherwise set to false
@@ -57,3 +57,12 @@ require("obsidian").setup({
 
   disable_frontmatter = true
 })
+
+local function make_new_note_with_title()
+  local title = vim.fn.input("Enter New Note Title: ")
+  vim.cmd("ObsidianNew " .. title)
+end
+
+vim.keymap.set("n", "<leader>oo", "<cmd>ObsidianOpen<CR>", { desc = "Open Obsidian" })
+vim.keymap.set("n", "<leader>on", "make_new_note_with_title", { desc = "New Obsidian note" })
+vim.keymap.set("v", "<leader>ol", "<cmd>ObsidianLinkNew<CR>", { desc = "New Obsidian link" })

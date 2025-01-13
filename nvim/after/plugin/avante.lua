@@ -1,33 +1,36 @@
-require("avante").setup({
-  provider = "claude",
-  claude = {
-    endpoint = "https://api.anthropic.com",
-    model = "claude-3-5-sonnet-20240620",
-    temperature = 0,
-    max_tokens = 4096,
-  },
-  -- provider = "openai",
-  -- openai = {
-  --   endpoint = "https://api.openai.com/v1",
-  --   model = "gpt-4",
-  --   timeout = 30000, -- Timeout in milliseconds
-  --   temperature = 0,
-  --   max_tokens = 4096,
-  --   ["local"] = false,
-  -- },
-  -- provider = "azure",
-  -- azure = {
-  --   endpoint = "https://oairtdsdevsusdnamlopsptu01.openai.azure.com/",
-  --   deployment = "gpt-4o",
-  --   model = "gpt-4o",
-  --   api_version = "2024-06-01",
-  --   timeout = 30000, -- Timeout in milliseconds
-  --   temperature = 0,
-  --   max_tokens = 4096,
-  --   ["local"] = false,
-  -- },
+local utils = require("rolzy.utils")
+
+local provider_config
+
+if utils.is_wsl() then
+  vim.notify("Using Azure provider for WSL", vim.log.levels.INFO)
+  provider_config = {
+    provider = "azure",
+    azure = {
+      endpoint = "https://oairtdsdevsusdnamlopsptu02.openai.azure.com/",
+      deployment = "gpt-4o",
+      -- model = "gpt-4o",
+      api_version = "2024-06-01",
+      timeout = 30000, -- Timeout in milliseconds
+      temperature = 0,
+      max_tokens = 4096,
+    },
+  }
+else
+  vim.notify("Using Claude provider for non-WSL", vim.log.levels.INFO)
+  provider_config = {
+    provider = "claude",
+    claude = {
+      endpoint = "https://api.anthropic.com",
+      model = "claude-3-5-sonnet-20240620",
+      temperature = 0,
+      max_tokens = 4096,
+    },
+  }
+end
+
+require("avante").setup(vim.tbl_extend("force", provider_config, {
   mappings = {
-    ask = "<leader>c",
     edit = "<leader>ae",
     refresh = "<leader>ar",
     diff = {
@@ -52,8 +55,8 @@ require("avante").setup({
   },
   hints = { enabled = true },
   windows = {
-    wrap = true, -- similar to vim.o.wrap
-    width = 30, -- default % based on available width
+    wrap = true,        -- similar to vim.o.wrap
+    width = 30,         -- default % based on available width
     sidebar_header = {
       align = "center", -- left, center, right for title
       rounded = true,
@@ -70,5 +73,6 @@ require("avante").setup({
     autojump = true,
     list_opener = "copen",
   },
-})
+}))
 
+vim.keymap.set("n", "<leader>c", "<cmd>AvanteToggle<CR>", { desc = "Chat with Avante" })
