@@ -187,6 +187,7 @@ return require('lazy').setup({
           vim.keymap.set('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>', opts)
           vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
           vim.keymap.set('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
+          vim.keymap.set('n', 'gR', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
         end,
       })
 
@@ -312,4 +313,75 @@ return require('lazy').setup({
       end, { desc = 'Comment toggle linewise (visual) and preserve the visual selection' })
     end,
   },
+
+  -- Status line
+  {
+    "nvim-lualine/lualine.nvim",
+    event = "VeryLazy",
+    config = function()
+      -- Show python version and virtualenv in status line
+      local activated_venv = function()
+        local venv_name = require("venv-selector").venv()
+        return venv_name:match("([^/]+)$")
+      end
+
+      local cached_python_version = nil
+
+      local function get_python_version()
+        if cached_python_version then
+          return cached_python_version
+        end
+        local handle = io.popen("python -V 2>&1", "r")
+        if handle then
+          local python_version = handle:read("*a")
+          handle:close()
+          cached_python_version = python_version:match("%d+%.%d+%.%d+") or ""
+        else
+          cached_python_version = ""
+        end
+        return cached_python_version
+      end
+
+      local function lualine_python()
+        local parts = {}
+        local venv = activated_venv()
+        local python_version = get_python_version()
+        if venv ~= "" then
+          table.insert(parts, venv)
+        end
+        if python_version ~= "" then
+          table.insert(parts, python_version)
+        end
+        return table.concat(parts, " [") .. (#parts > 1 and "]" or "")
+      end
+      local function isRecording()
+        local reg = vim.fn.reg_recording()
+        if reg == "" then
+          -- not recording
+          return ""
+        end
+        return "recording to " .. reg
+      end
+      local function get_schema()
+        local schema = require("yaml-companion").get_buf_schema(0)
+        if schema.result[1].name == "none" then
+          return ""
+        end
+        return schema.result[1].name
+      end
+      require("lualine").setup({
+        sections = {
+          lualine_x = {
+            "fileformat",
+            "filetype",
+            { get_schema, icon = "" },
+            { isRecording, icon = "" }
+          },
+          lualine_y = {
+            { lualine_python, icon = "🐍" },
+          },
+        },
+      })
+    end,
+  }
 })

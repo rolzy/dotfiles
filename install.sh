@@ -1,7 +1,7 @@
 # Make sure directories exist
 mkdir -p ~/.config
 mkdir -p ~/.local/bin
-#
+
 # Make soft simlinks of rc files to home directory
 ln -nsf ~/dotfiles/.zshrc ~/.zshrc
 ln -nsf ~/dotfiles/.tmux.conf ~/.tmux.conf

@@ -75,4 +75,4 @@ require("avante").setup(vim.tbl_extend("force", provider_config, {
   },
 }))
 
-vim.keymap.set("n", "<leader>c", "<cmd>AvanteChat<CR>", { desc = "Chat with Avante" })
+vim.keymap.set("n", "<leader>c", "<cmd>AvanteToggle<CR>", { desc = "Chat with Avante" })
