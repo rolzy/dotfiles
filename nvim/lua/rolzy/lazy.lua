@@ -33,7 +33,7 @@ return require('lazy').setup({
     build = ':TSUpdate'
   },
 
-  { "catppuccin/nvim", name = "catppuccin"},
+  { "catppuccin/nvim", name = "catppuccin" },
   -- Colorscheme for 2024 - Kanagawa
   -- {
   --   'rebelot/kanagawa.nvim',
@@ -361,23 +361,15 @@ return require('lazy').setup({
         end
         return "recording to " .. reg
       end
-      local function get_schema()
-        local schema = require("yaml-companion").get_buf_schema(0)
-        if schema.result[1].name == "none" then
-          return ""
-        end
-        return schema.result[1].name
-      end
       require("lualine").setup({
         sections = {
           lualine_x = {
             "fileformat",
             "filetype",
-            { get_schema, icon = "" },
             { isRecording, icon = "" }
           },
           lualine_y = {
-            { lualine_python, icon = "🐍" },
+            { lualine_python },
           },
         },
       })

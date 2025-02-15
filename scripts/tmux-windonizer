@@ -3,7 +3,7 @@
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$(find ~ -name ".git" -type d -exec dirname {} \; | sed '/rolzy\/\./d' | fzf)
+    selected=$(find ~ -name ".*" -prune -name ".git" -type d -exec dirname {} \; | fzf)
 fi
 
 if [[ -z $selected ]]; then

@@ -19,3 +19,4 @@
 	helper = store
 [push]
 	followTags = true
+	autoSetupRemote = True
