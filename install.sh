@@ -20,27 +20,28 @@ curl https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh |
 
 # Install dependencies
 sudo apt update && sudo apt install -y \
-    curl \
-    gnupg \
-    git \
-    htop \
-    rsync \
-    tmux \
-    unzip \
-    neovim \
-    zsh \
-    ripgrep \
-    python3-pip \
-    zplug \
-    fontconfig \
-    ruby-full \
-    build-essential \
-    zlib1g-dev \
-    git-lfs \
-    pipx \
-    fd-find \
+	curl \
+	gnupg \
+	git \
+	htop \
+	rsync \
+	tmux \
+	unzip \
+	neovim \
+	zsh \
+	ripgrep \
+	python3-pip \
+	zplug \
+	fontconfig \
+	ruby-full \
+	build-essential \
+	zlib1g-dev \
+	git-lfs \
+	pipx \
+	fd-find \
+	command-not-found \
 	wslu
-    
+
 # Install Node v21
 curl -fsSL https://deb.nodesource.com/setup_21.x | sudo -E bash -
 sudo apt-get install -y nodejs
