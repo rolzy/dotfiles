@@ -80,6 +80,7 @@ alias pull='git pull'
 alias sa='source env/bin/activate'
 alias cri='sudo config-rio.sh -n internal'
 alias cre='sudo config-rio.sh -n external'
+alias clip='/mnt/c/Windows/System32/clip.exe'
 
 # The git add function
 ga() {
@@ -187,7 +188,7 @@ preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 if command -v pyenv 1>/dev/null 2>&1; then
- eval "$(pyenv init -)"
+ eval "$(pyenv init - zsh)"
 fi
 
 # Check if running under WSL
