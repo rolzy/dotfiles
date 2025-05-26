@@ -64,10 +64,16 @@ return require('lazy').setup({
         callback = function()
           local f = vim.fn.expand('%:p')
           if vim.fn.isdirectory(f) ~= 0 then
-            vim.cmd('Neotree current dir=' .. f)
+            vim.cmd('Neotree position=current dir=' .. f)
             -- neo-tree is loaded now, delete the init autocmd
             vim.api.nvim_clear_autocmds { group = 'NeoTreeInit' }
           end
+        end
+      })
+      vim.api.nvim_create_autocmd('FileReadPost', {
+        group = vim.api.nvim_create_augroup('NeoTreeToggle', { clear = true }),
+        callback = function()
+          vim.cmd('Neotree action=show')
         end
       })
     end,
@@ -80,6 +86,10 @@ return require('lazy').setup({
             ".github*",
             ".gitignore"
           }
+        },
+        follow_current_file = {
+          enabled = true,
+          leave_dirs_open = false
         }
       },
       -- Open neotree with relative line numbers
@@ -371,6 +381,26 @@ return require('lazy').setup({
           lualine_y = {
             { lualine_python },
           },
+        },
+      })
+    end,
+  },
+
+  -- auto-closing tags
+  {
+    "windwp/nvim-ts-autotag",
+    config = function()
+      require('nvim-ts-autotag').setup({
+        filetypes = {
+          'html',
+          'javascript',
+          'typescript',
+          'javascriptreact',
+          'typescriptreact',
+          'svelte',
+          'vue',
+          'astro',
+          'markdown',
         },
       })
     end,

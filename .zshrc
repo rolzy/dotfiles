@@ -38,6 +38,41 @@ zinit light romkatv/powerlevel10k
 
 ################################################################################
 #                                                                              #
+#                                 ENV VARS                                     #
+#                                                                              #
+################################################################################
+
+# Setup pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+if command -v pyenv 1>/dev/null 2>&1; then
+ eval "$(pyenv init -)"
+fi
+
+# Check if running under WSL
+if [[ "$(uname -r)" == *Microsoft* || "$(uname -r)" == *microsoft* ]]; then
+    export REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
+    export NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt
+    export BROWSER=wslview
+fi
+
+# Install npm packages globally without sudo
+# https://github.com/sindresorhus/guides/blob/main/npm-global-without-sudo.md
+NPM_PACKAGES="${HOME}/.npm-packages"
+export PATH="$PATH:$NPM_PACKAGES/bin"
+export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
+
+# If .env file exists in the home directory, use that to set API key variables
+if [[ -f ~/.env ]]; then
+    set -a
+    source ~/.env
+    set +a
+fi
+
+source ~/.profile
+
+################################################################################
+#                                                                              #
 #                                  LOOKS                                       #
 #                                                                              #
 ################################################################################
