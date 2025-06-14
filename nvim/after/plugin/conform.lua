@@ -3,6 +3,8 @@ require('conform').setup({
   formatters_by_ft = {
     css = { 'prettier' },
     html = { 'prettier' },
+    bash = { 'shellcheck', 'shfmt' },
+    zsh = { 'shellcheck', 'shfmt' },
     javascript = { 'prettier' },
     json = { 'fixjson' },
     terraform = { 'terraform_fmt' },
