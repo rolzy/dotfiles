@@ -188,9 +188,6 @@ setopt hist_find_no_dups     # Don't display duplicates when searching history.
 #                                                                              #
 ################################################################################
 
-bindkey '^F' autosuggest-accept      # Use CTRL-F to accept auto-suggestions
-bindkey -v                           # Enable vi mode
-
 # Change cursor shape for different vi modes.
 function zle-keymap-select {
   if [[ ${KEYMAP} == vicmd ]] ||
@@ -211,6 +208,9 @@ zle-line-init() {
 zle -N zle-line-init
 echo -ne '\e[5 q' # Use beam shape cursor on startup.
 preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
+
+bindkey -v                           # Enable vi mode
+bindkey '^F' autosuggest-accept      # Use CTRL-F to accept auto-suggestions
 
 ################################################################################
 #                                                                              #
