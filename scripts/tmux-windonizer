@@ -3,7 +3,7 @@
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$(find ~ -name ".*" -prune -name ".git" -type d -exec dirname {} \; | fzf)
+    selected=$(fdfind -t d -H --no-ignore-vcs '.git' ~ | grep '/\.git/$' | sed 's|/.git/$||' | grep -v '^/home/rolzy/\.' | fzf)
 fi
 
 if [[ -z $selected ]]; then

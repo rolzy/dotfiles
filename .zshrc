@@ -1,3 +1,5 @@
+# Amazon Q pre block. Keep at the top of this file.
+[[ -f "${HOME}/.local/share/amazon-q/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/.local/share/amazon-q/shell/zshrc.pre.zsh"
 ################################################################################
 #                                                                              #
 #                              INITIALIZATION                                  #
@@ -61,6 +63,9 @@ fi
 NPM_PACKAGES="${HOME}/.npm-packages"
 export PATH="$PATH:$NPM_PACKAGES/bin"
 export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
+
+# Setup EDITOR variable to neovim
+export EDITOR=nvim
 
 # If .env file exists in the home directory, use that to set API key variables
 if [[ -f ~/.env ]]; then
@@ -189,8 +194,9 @@ setopt hist_find_no_dups     # Don't display duplicates when searching history.
 #                                                                              #
 ################################################################################
 
-bindkey '^F' autosuggest-accept      # Use CTRL-F to accept auto-suggestions
 bindkey -v                           # Enable vi mode
+bindkey "^H" backward-delete-char
+bindkey "^?" backward-delete-char
 
 # Change cursor shape for different vi modes.
 function zle-keymap-select {
@@ -213,6 +219,8 @@ zle -N zle-line-init
 echo -ne '\e[5 q' # Use beam shape cursor on startup.
 preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 
+bindkey '^F' autosuggest-accept      # Use CTRL-F to accept auto-suggestions
+
 ################################################################################
 #                                                                              #
 #                                 ENV VARS                                     #
@@ -221,7 +229,7 @@ preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 
 # Setup pyenv
 export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
+export PATH="$PYENV_ROOT/bin:$HOME/.local/bin:$PATH"
 if command -v pyenv 1>/dev/null 2>&1; then
  eval "$(pyenv init - zsh)"
 fi
@@ -229,7 +237,9 @@ fi
 # Check if running under WSL
 if [[ "$(uname -r)" == *Microsoft* || "$(uname -r)" == *microsoft* ]]; then
     export REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
+    export SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
     export NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt
+    export CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
     export BROWSER=wslview
 fi
 
@@ -246,7 +256,9 @@ fi
 #                                                                              #
 ################################################################################
 
-eval "$(fzf --zsh)" # Enable fzf integration
+#eval "$(fzf --zsh)" # Enable fzf integration
+source /usr/share/doc/fzf/examples/completion.zsh
+source /usr/share/doc/fzf/examples/key-bindings.zsh
 
 # Configure FZF.
 export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git'"
@@ -254,3 +266,7 @@ export FZF_DEFAULT_OPTS="--color=dark"
 
 # zsh-autosuggestions settings.
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+export REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
+
+# Amazon Q post block. Keep at the bottom of this file.
+[[ -f "${HOME}/.local/share/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/.local/share/amazon-q/shell/zshrc.post.zsh"
