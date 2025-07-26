@@ -7,6 +7,7 @@ ln -nsf ~/dotfiles/.zshrc ~/.zshrc
 ln -nsf ~/dotfiles/.tmux.conf ~/.tmux.conf
 ln -nsf ~/dotfiles/.gitconfig ~/.gitconfig
 ln -nsf ~/dotfiles/nvim ~/.config/nvim
+ln -nsf ~/dotfiles/amazonq/mcp.json ~/.aws/amazonq/mcp.json
 ln -s ~/dotfiles/scripts/* ~/.local/bin/
 
 # Copy a template of .env file to the home directory
@@ -20,27 +21,27 @@ curl https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh |
 
 # Install dependencies
 sudo apt update && sudo apt install -y \
-    curl \
-    gnupg \
-    git \
-    htop \
-    rsync \
-    tmux \
-    unzip \
-    neovim \
-    zsh \
-    ripgrep \
-    python3-pip \
-    zplug \
-    fontconfig \
-    ruby-full \
-    build-essential \
-    zlib1g-dev \
-    git-lfs \
-    pipx \
-    fd-find \
+	curl \
+	gnupg \
+	git \
+	htop \
+	rsync \
+	tmux \
+	unzip \
+	neovim \
+	zsh \
+	ripgrep \
+	python3-pip \
+	zplug \
+	fontconfig \
+	ruby-full \
+	build-essential \
+	zlib1g-dev \
+	git-lfs \
+	pipx \
+	fd-find \
 	wslu
-    
+
 # Install Node v21
 curl -fsSL https://deb.nodesource.com/setup_21.x | sudo -E bash -
 sudo apt-get install -y nodejs
@@ -63,10 +64,6 @@ chsh -s /bin/zsh
 # Install thefuck
 pipx install thefuck shell-gpt
 
-# Install pyenv
-sudo apt install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
-curl https://pyenv.run | bash
-
 # Install cfn-lsp-extra
 pipx install cfn-lsp-extra
 
@@ -77,3 +74,6 @@ sudo ./aws/install
 
 curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb" -o "session-manager-plugin.deb"
 sudo dpkg -i session-manager-plugin.deb
+
+# Install uv
+pipx install uv
