@@ -64,5 +64,8 @@ local function make_new_note_with_title()
 end
 
 vim.keymap.set("n", "<leader>oo", "<cmd>ObsidianOpen<CR>", { desc = "Open Obsidian" })
-vim.keymap.set("n", "<leader>on", "make_new_note_with_title", { desc = "New Obsidian note" })
+vim.keymap.set("n", "<leader>on", function()
+  print("Creating a new Obsidian note...")
+  make_new_note_with_title()
+end, { desc = "New Obsidian note" })
 vim.keymap.set("v", "<leader>ol", "<cmd>ObsidianLinkNew<CR>", { desc = "New Obsidian link" })

@@ -117,7 +117,16 @@ alias vim="nvim"
 alias gs='git status'
 alias push='git push'
 alias pull='git pull'
-alias sa='source env/bin/activate'
+# Alias to activate virtual environment (checks for both 'env' and '.venv')
+sa() {
+    if [ -d "env" ]; then
+        source env/bin/activate
+    elif [ -d ".venv" ]; then
+        source .venv/bin/activate
+    else
+        echo "Error: Neither 'env' nor '.venv' directory found."
+    fi
+}
 alias cri='sudo config-rio.sh -n internal'
 alias cre='sudo config-rio.sh -n external'
 alias clip='/mnt/c/Windows/System32/clip.exe'
@@ -270,3 +279,5 @@ export REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
 
 # Amazon Q post block. Keep at the bottom of this file.
 [[ -f "${HOME}/.local/share/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/.local/share/amazon-q/shell/zshrc.post.zsh"
+
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
