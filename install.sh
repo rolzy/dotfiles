@@ -1,6 +1,8 @@
 # Make sure directories exist
 mkdir -p ~/.config
 mkdir -p ~/.local/bin
+mkdir -p ~/projects
+mkdir -p ~/projects/oss
 
 # Make soft simlinks of rc files to home directory
 ln -nsf ~/dotfiles/.zshrc ~/.zshrc
@@ -42,6 +44,9 @@ sudo apt update && sudo apt install -y \
 	fd-find \
 	wslu
 
+# Install uv
+pipx install uv
+
 # Install Node v21
 curl -fsSL https://deb.nodesource.com/setup_21.x | sudo -E bash -
 sudo apt-get install -y nodejs
@@ -65,7 +70,8 @@ chsh -s /bin/zsh
 pipx install thefuck shell-gpt
 
 # Install cfn-lsp-extra
-pipx install cfn-lsp-extra
+git clone https://github.com/rolzy/cfn-lsp-extra.git ~/projects/oss/cfn-lsp-extra
+uv tool install ~/projects/oss/cfn-lsp-extra
 
 # Install the AWS CLI and add-ons
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
@@ -74,6 +80,3 @@ sudo ./aws/install
 
 curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb" -o "session-manager-plugin.deb"
 sudo dpkg -i session-manager-plugin.deb
-
-# Install uv
-pipx install uv

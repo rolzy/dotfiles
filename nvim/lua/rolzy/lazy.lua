@@ -210,7 +210,8 @@ return require('lazy').setup({
           -- this first function is the "default handler"
           -- it applies to every language server without a "custom handler"
           function(server_name)
-            require('lspconfig')[server_name].setup({})
+            vim.lsp.enable(server_name)
+            -- require('lspconfig')[server_name].setup({})
           end,
         }
       })
@@ -296,9 +297,6 @@ return require('lazy').setup({
     },
     lazy = false,
     branch = "regexp", -- This is the regexp branch, use this for the new version
-    config = function()
-      require("venv-selector").setup()
-    end,
   },
 
   {
