@@ -34,24 +34,7 @@ return require('lazy').setup({
   },
 
   { "catppuccin/nvim", name = "catppuccin" },
-  -- Colorscheme for 2024 - Kanagawa
-  -- {
-  --   'rebelot/kanagawa.nvim',
-  --   as = 'kanagawa',
-  --   config = function()
-  --     vim.cmd('autocmd ColorScheme * highlight Normal ctermbg=NONE guibg=NONE')
-  --     vim.cmd('colorscheme kanagawa')
-  --   end
-  -- },
-  --
-  -- {
-  --   "0xstepit/flow.nvim",
-  --   lazy = false,
-  --   priority = 1000,
-  --   opts = {},
-  -- },
 
-  -- File tree for 2025 - neotree
   {
     "nvim-neo-tree/neo-tree.nvim",
     -- Open neo-tree in full screen when opening a directory
@@ -230,18 +213,99 @@ return require('lazy').setup({
   'ray-x/lsp_signature.nvim',
   'b0o/schemastore.nvim',
 
+  -- {
+  --   "yetone/avante.nvim",
+  --   event = "VeryLazy",
+  --   lazy = false,
+  --   version = false,
+  --   build = 'make',
+  --   dependencies = {
+  --     "nvim-tree/nvim-web-devicons",
+  --     "stevearc/dressing.nvim",
+  --     "nvim-lua/plenary.nvim",
+  --     "MunifTanjim/nui.nvim"
+  --   }
+  -- },
+  --
   {
-    "yetone/avante.nvim",
-    event = "VeryLazy",
-    lazy = false,
-    version = false,
-    build = 'make',
+    "olimorris/codecompanion.nvim",
+    version = "^18.0.0",
+    opts = {
+      opts = {
+        log_level = "DEBUG"
+      },
+      interactions = {
+        chat = {
+          adapter = "copilot",
+          opts = {
+            ---Decorate the user message before it's sent to the LLM
+            ---@param message string
+            ---@param adapter CodeCompanion.Adapter
+            ---@param context table
+            ---@return string
+            prompt_decorator = function(message, adapter, context)
+              return string.format([[<prompt>%s</prompt>]], message)
+            end,
+          },
+          tools = {
+            opts = {
+              default_tools = {
+                "full_stack_dev",
+                "web_search"
+              }
+            },
+          },
+          variables = {
+            ["buffer"] = {
+              opts = {
+                -- Always sync the buffer by sharing its "diff"
+                -- Or choose "all" to share the entire buffer
+                default_params = "diff",
+              },
+            },
+          }
+        },
+      },
+      display = {
+        diff = {
+          enabled = true,
+        },
+        chat = {
+          window = {
+            layout = "vertical",
+            full_height = "true",
+            position = "right",
+            width = 0.4,
+            border = "single",
+            opts = {
+              breakindent = true,
+              linebreak = true,
+              wrap = true,
+            },
+          },
+        }
+      },
+    },
     dependencies = {
-      "nvim-tree/nvim-web-devicons",
-      "stevearc/dressing.nvim",
       "nvim-lua/plenary.nvim",
-      "MunifTanjim/nui.nvim"
-    }
+      "nvim-treesitter/nvim-treesitter",
+    },
+  },
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
+    ft = { "markdown", "codecompanion" }
+  },
+  {
+    "HakonHarnes/img-clip.nvim",
+    opts = {
+      filetypes = {
+        codecompanion = {
+          prompt_for_file_name = false,
+          template = "[Image]($FILE_PATH)",
+          use_absolute_path = true,
+        },
+      },
+    },
   },
 
   'tpope/vim-surround',

@@ -277,7 +277,14 @@ export FZF_DEFAULT_OPTS="--color=dark"
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 export REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
 
+# Setup Pay Respects
+eval "$(pay-respects zsh)"
+
 # Amazon Q post block. Keep at the bottom of this file.
 [[ -f "${HOME}/.local/share/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/.local/share/amazon-q/shell/zshrc.post.zsh"
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

@@ -22,7 +22,7 @@ require("which-key").setup {
 
 local wk = require("which-key")
 wk.add({
-  { "<leader>a", group = "Avante", icon = { icon = "" } },
+  -- { "<leader>c", group = "CodeCompanion", icon = { icon = "" } },
   { "<leader>d", group = "Debugger", icon = { icon = "" } },
   { "<leader>h", group = "Harpoon", icon = { icon = "󱡀" } },
   { "<leader>o", group = "Obsidian", icon = { icon = "󱞁" } },

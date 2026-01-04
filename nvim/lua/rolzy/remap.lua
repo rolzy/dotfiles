@@ -47,3 +47,13 @@ vim.api.nvim_create_user_command("OpenFileExplorer", function()
     end
 end, {})
 vim.keymap.set("n", "<leader>e", "<cmd>OpenFileExplorer<CR>", { desc = "Open in File Explorer" })
+
+
+function insertFullPath()
+    local filepath = vim.fn.expand('%')
+    vim.fn.setreg('+', filepath) -- write to clippoard
+end
+
+vim.keymap.set('n', '<leader>p', insertFullPath, { noremap = true, silent = true, desc = "Copy Full Path" })
+
+vim.keymap.set("n", "<leader>c", "<cmd>CodeCompanionChat Toggle<CR>", { desc = "Chat with Copilot" })

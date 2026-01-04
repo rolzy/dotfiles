@@ -69,6 +69,8 @@ require('lspconfig').yamlls.setup {
   }
 }
 
+require('lspconfig').ts_ls.setup {}
+
 -- CloudFormation
 require('lspconfig.configs').cfn_lsp = {
   default_config = {
