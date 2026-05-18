@@ -230,20 +230,6 @@ return require('lazy').setup({
   'ray-x/lsp_signature.nvim',
   'b0o/schemastore.nvim',
 
-  {
-    "yetone/avante.nvim",
-    event = "VeryLazy",
-    lazy = false,
-    version = false,
-    build = 'make',
-    dependencies = {
-      "nvim-tree/nvim-web-devicons",
-      "stevearc/dressing.nvim",
-      "nvim-lua/plenary.nvim",
-      "MunifTanjim/nui.nvim"
-    }
-  },
-
   'tpope/vim-surround',
   'tpope/vim-repeat',
   'tpope/vim-sleuth',

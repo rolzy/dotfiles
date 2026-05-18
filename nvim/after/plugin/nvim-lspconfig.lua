@@ -1,5 +1,5 @@
 -- Lua
-require('lspconfig').lua_ls.setup {
+vim.lsp.config('lua_ls', {
   settings = {
     Lua = {
       runtime = {
@@ -24,13 +24,13 @@ require('lspconfig').lua_ls.setup {
       },
     }
   }
-}
+})
 
 -- Terraform
-require('lspconfig').terraformls.setup {}
+vim.lsp.config('terraformls', {})
 
 -- YamlLS
-require('lspconfig').yamlls.setup {
+vim.lsp.config('yamlls', {
   settings = {
     yaml = {
       schemas = require("schemastore").json.schemas(),
@@ -67,16 +67,15 @@ require('lspconfig').yamlls.setup {
       },
     }
   }
-}
+})
 
 -- CloudFormation
-require('lspconfig.configs').cfn_lsp = {
-  default_config = {
-    cmd = { os.getenv("HOME") .. '/.local/bin/cfn-lsp-extra' },
-    filetypes = { 'yaml.cloudformation', 'json.cloudformation' },
-    root_dir = function(fname)
-      return require('lspconfig').util.find_git_ancestor(fname) or vim.fn.getcwd()
-    end
-  }
-}
-require('lspconfig').cfn_lsp.setup {}
+vim.lsp.config("cfn-lsp-extra", {
+  cmd = { os.getenv("HOME") .. '/.local/bin/cfn-lsp-extra' },
+  filetypes = { 'yaml.cloudformation', 'json.cloudformation' },
+  root_markers = { '.git' },
+  settings = {
+    documentFormatting = false,
+  },
+})
+vim.lsp.enable("cfn-lsp-extra")
